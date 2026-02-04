@@ -27,7 +27,7 @@ namespace Metodos
         private string material;
         private int cantidadActual;
         private float precioPorLitro;
-
+ 
         public Botella(float precioPorLitro)
         {
             this.precioPorLitro = precioPorLitro;
