@@ -7,10 +7,7 @@ namespace Controles_Varios_y_Operador_Ternario
             InitializeComponent();
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnArgegar_Click(object sender, EventArgs e)
         {
@@ -18,15 +15,7 @@ namespace Controles_Varios_y_Operador_Ternario
             lvElementos.Items.Add(elemento);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void rbVerano_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
@@ -38,15 +27,6 @@ namespace Controles_Varios_y_Operador_Ternario
             cbComidaFavorita.Items.Add("Argentina");
         }
 
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnVerPerfil_Click(object sender, EventArgs e)
         {
@@ -60,12 +40,16 @@ namespace Controles_Varios_y_Operador_Ternario
             {
                 temporadaFavorita = "Verano";
             }
-            else 
+            else
             {
                 temporadaFavorita = "Invierno";
             }
 
-            string comidaFavorita = cbComidaFavorita.SelectedItem.ToString();
+            // Intenta convertir a string. Si es nulo, guarda "Ninguna".
+            string comidaFavorita = cbComidaFavorita.SelectedItem?.ToString() ?? "Ninguna"; //El doble signo de interrogación es para valores nulos.
+                                                                                            //Ese doble signo de interrogación ?? se llama Operador de Coalescencia Nula (Null-Coalescing Operator).
+
+
 
             string cantidadDescensos = numContadorDescensos.Value.ToString();
 

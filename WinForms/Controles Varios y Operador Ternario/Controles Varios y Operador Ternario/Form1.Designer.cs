@@ -55,7 +55,6 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(258, 34);
             txtNombre.TabIndex = 0;
-            txtNombre.TextChanged += txtNombre_TextChanged;
             // 
             // btnArgegar
             // 
@@ -78,7 +77,6 @@
             lvElementos.TabIndex = 2;
             lvElementos.UseCompatibleStateImageBehavior = false;
             lvElementos.View = View.List;
-            lvElementos.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // lblNombre
             // 
@@ -92,7 +90,6 @@
             lblNombre.Size = new Size(89, 28);
             lblNombre.TabIndex = 3;
             lblNombre.Text = "Nombre";
-            lblNombre.Click += label1_Click;
             // 
             // lblFecha
             // 
@@ -180,7 +177,6 @@
             rbVerano.TabStop = true;
             rbVerano.Text = "Verano";
             rbVerano.UseVisualStyleBackColor = true;
-            rbVerano.CheckedChanged += rbVerano_CheckedChanged;
             // 
             // cbComidaFavorita
             // 
@@ -220,7 +216,6 @@
             lblCantidadDescensos.Size = new Size(226, 28);
             lblCantidadDescensos.TabIndex = 12;
             lblCantidadDescensos.Text = "Cantidad de descensos";
-            lblCantidadDescensos.Click += label1_Click_1;
             // 
             // btnVerPerfil
             // 
