@@ -65,7 +65,7 @@
             // verPerfilToolStripMenuItem
             // 
             verPerfilToolStripMenuItem.Name = "verPerfilToolStripMenuItem";
-            verPerfilToolStripMenuItem.Size = new Size(224, 32);
+            verPerfilToolStripMenuItem.Size = new Size(174, 32);
             verPerfilToolStripMenuItem.Text = "Ver Perfil";
             verPerfilToolStripMenuItem.Click += verPerfilToolStripMenuItem_Click;
             // 
@@ -96,9 +96,11 @@
             ClientSize = new Size(800, 450);
             Controls.Add(toolStrip1);
             Controls.Add(menuStrip1);
+            IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "fmrPrincipal";
             Text = "fmrPrincipal";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             toolStrip1.ResumeLayout(false);

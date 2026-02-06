@@ -17,8 +17,19 @@ namespace Ventanas_Contenedoras
 
         private void verPerfilToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            //Validación para que la ventana no se abra más de una vez
+            foreach (Form formulario in Application.OpenForms)
+            {
+                if (formulario.GetType() == typeof(Form1))
+                {
+                    MessageBox.Show("La ventana ya está abierta");
+                    return;
+                }
+            }
             Form1 ventanaPerfil = new Form1();
-            ventanaPerfil.ShowDialog();
+            ventanaPerfil.MdiParent = this;
+            ventanaPerfil.Show();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
