@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tipo_Date_Time
 {
-    internal class Program
+    internal class Program 
     {
         static void Main(string[] args)
         {
@@ -27,6 +27,9 @@ namespace Tipo_Date_Time
 
             //Como mostrar solo la fecha sin la hora
             Console.WriteLine("Solo la fecha: " + fechaActual.ToShortDateString());
+
+            //Como expresar la fecha en formato latinoamericano
+            Console.WriteLine("Fecha en formato latinoamericano: " + fechaActual.ToString("dd/MM//yyyy"));
 
         }
     }
