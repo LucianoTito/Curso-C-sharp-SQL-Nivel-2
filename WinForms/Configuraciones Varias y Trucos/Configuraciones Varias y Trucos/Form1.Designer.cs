@@ -53,7 +53,7 @@
             lbPerfil.Location = new Point(358, 29);
             lbPerfil.Name = "lbPerfil";
             lbPerfil.Size = new Size(55, 28);
-            lbPerfil.TabIndex = 0;
+            lbPerfil.TabIndex = 12;
             lbPerfil.Text = "Perfil";
             // 
             // lbNombre
@@ -71,7 +71,7 @@
             lbCantidadDescensos.Location = new Point(71, 199);
             lbCantidadDescensos.Name = "lbCantidadDescensos";
             lbCantidadDescensos.Size = new Size(217, 28);
-            lbCantidadDescensos.TabIndex = 2;
+            lbCantidadDescensos.TabIndex = 9;
             lbCantidadDescensos.Text = "Cantidad de Descensos:";
             // 
             // lbFechaNacimiento
@@ -80,7 +80,7 @@
             lbFechaNacimiento.Location = new Point(71, 108);
             lbFechaNacimiento.Name = "lbFechaNacimiento";
             lbFechaNacimiento.Size = new Size(172, 28);
-            lbFechaNacimiento.TabIndex = 3;
+            lbFechaNacimiento.TabIndex = 11;
             lbFechaNacimiento.Text = "Fecha Nacimiento:";
             // 
             // label5
@@ -89,7 +89,7 @@
             label5.Location = new Point(71, 245);
             label5.Name = "label5";
             label5.Size = new Size(159, 28);
-            label5.TabIndex = 4;
+            label5.TabIndex = 10;
             label5.Text = "Comida Favorita:";
             // 
             // cbxBoca
@@ -98,7 +98,7 @@
             cbxBoca.Location = new Point(71, 155);
             cbxBoca.Name = "cbxBoca";
             cbxBoca.Size = new Size(168, 32);
-            cbxBoca.TabIndex = 5;
+            cbxBoca.TabIndex = 3;
             cbxBoca.Text = "Hincha de Boca";
             cbxBoca.UseVisualStyleBackColor = true;
             // 
@@ -107,21 +107,23 @@
             numContadorDescensos.Location = new Point(294, 193);
             numContadorDescensos.Name = "numContadorDescensos";
             numContadorDescensos.Size = new Size(150, 34);
-            numContadorDescensos.TabIndex = 6;
+            numContadorDescensos.TabIndex = 4;
             // 
             // txtNombre
             // 
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtNombre.Location = new Point(166, 66);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(125, 34);
-            txtNombre.TabIndex = 7;
+            txtNombre.Size = new Size(124, 34);
+            txtNombre.TabIndex = 0;
             // 
             // dtpFechaNacimiento
             // 
+            dtpFechaNacimiento.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dtpFechaNacimiento.Location = new Point(249, 103);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(250, 34);
-            dtpFechaNacimiento.TabIndex = 8;
+            dtpFechaNacimiento.Size = new Size(249, 34);
+            dtpFechaNacimiento.TabIndex = 2;
             // 
             // gbEstacionFavorita
             // 
@@ -130,7 +132,7 @@
             gbEstacionFavorita.Location = new Point(71, 374);
             gbEstacionFavorita.Name = "gbEstacionFavorita";
             gbEstacionFavorita.Size = new Size(450, 125);
-            gbEstacionFavorita.TabIndex = 9;
+            gbEstacionFavorita.TabIndex = 6;
             gbEstacionFavorita.TabStop = false;
             gbEstacionFavorita.Text = "Estacion Favorita del Año";
             // 
@@ -158,19 +160,20 @@
             // 
             // cbComidaFavorita
             // 
+            cbComidaFavorita.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             cbComidaFavorita.FormattingEnabled = true;
             cbComidaFavorita.Location = new Point(226, 245);
             cbComidaFavorita.Name = "cbComidaFavorita";
-            cbComidaFavorita.Size = new Size(336, 36);
-            cbComidaFavorita.TabIndex = 10;
+            cbComidaFavorita.Size = new Size(335, 36);
+            cbComidaFavorita.TabIndex = 5;
             // 
             // btnVerPerfil
             // 
             btnVerPerfil.Location = new Point(75, 537);
             btnVerPerfil.Name = "btnVerPerfil";
             btnVerPerfil.Size = new Size(120, 61);
-            btnVerPerfil.TabIndex = 11;
-            btnVerPerfil.Text = "Ver Perfil";
+            btnVerPerfil.TabIndex = 7;
+            btnVerPerfil.Text = "&Ver Perfil";
             btnVerPerfil.UseVisualStyleBackColor = true;
             btnVerPerfil.Click += btnVerPerfil_Click;
             // 
@@ -179,15 +182,15 @@
             btnAgregar.Location = new Point(329, 642);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(115, 46);
-            btnAgregar.TabIndex = 12;
-            btnAgregar.Text = "Agregar";
+            btnAgregar.TabIndex = 8;
+            btnAgregar.Text = "A&gregar";
             btnAgregar.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 720);
+            ClientSize = new Size(799, 720);
             Controls.Add(btnAgregar);
             Controls.Add(btnVerPerfil);
             Controls.Add(cbComidaFavorita);
@@ -201,6 +204,9 @@
             Controls.Add(lbCantidadDescensos);
             Controls.Add(lbNombre);
             Controls.Add(lbPerfil);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            MaximumSize = new Size(817, 769);
+            MinimumSize = new Size(521, 616);
             Name = "Form1";
             Text = "Configuraciones Varias y Trucos";
             Load += Form1_Load;

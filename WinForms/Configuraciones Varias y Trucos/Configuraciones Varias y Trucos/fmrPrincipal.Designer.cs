@@ -57,19 +57,20 @@
             // 
             archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             archivoToolStripMenuItem.Size = new Size(93, 32);
-            archivoToolStripMenuItem.Text = "Archivo";
+            archivoToolStripMenuItem.Text = "&Archivo";
             // 
             // opcionesToolStripMenuItem
             // 
             opcionesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { verPerfilToolStripMenuItem });
             opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
             opcionesToolStripMenuItem.Size = new Size(108, 32);
-            opcionesToolStripMenuItem.Text = "Opciones";
+            opcionesToolStripMenuItem.Text = "&Opciones";
             // 
             // verPerfilToolStripMenuItem
             // 
             verPerfilToolStripMenuItem.Name = "verPerfilToolStripMenuItem";
-            verPerfilToolStripMenuItem.Size = new Size(247, 32);
+            verPerfilToolStripMenuItem.ShortcutKeys = Keys.F3;
+            verPerfilToolStripMenuItem.Size = new Size(280, 32);
             verPerfilToolStripMenuItem.Text = "Ver Perfil Persona";
             verPerfilToolStripMenuItem.Click += verPerfilToolStripMenuItem_Click;
             // 
@@ -77,7 +78,7 @@
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(81, 32);
-            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Text = "Abou&t";
             // 
             // toolStrip1
             // 
