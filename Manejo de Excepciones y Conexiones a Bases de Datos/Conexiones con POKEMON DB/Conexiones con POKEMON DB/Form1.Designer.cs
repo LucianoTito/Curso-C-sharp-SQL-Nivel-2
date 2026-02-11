@@ -1,6 +1,6 @@
 ﻿namespace Conexiones_con_POKEMON_DB
 {
-    partial class Form1
+    partial class frmPokemons
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,18 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dgvPokemons = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
             SuspendLayout();
             // 
-            // Form1
+            // dgvPokemons
+            // 
+            dgvPokemons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPokemons.Location = new Point(121, 52);
+            dgvPokemons.Name = "dgvPokemons";
+            dgvPokemons.RowHeadersWidth = 51;
+            dgvPokemons.Size = new Size(663, 449);
+            dgvPokemons.TabIndex = 0;
+            dgvPokemons.CellContentClick += dgvPokemons_CellContentClick;
+            // 
+            // frmPokemons
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "Form1";
+            ClientSize = new Size(868, 525);
+            Controls.Add(dgvPokemons);
+            Name = "frmPokemons";
             Text = "Pokemons";
+            Load += frmPokemons_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvPokemons).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dgvPokemons;
     }
 }
