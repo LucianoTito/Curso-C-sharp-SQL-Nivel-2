@@ -26,19 +26,25 @@ namespace Manejo_de_Excepciones
                 MessageBox.Show(ex.ToString());
 
             }
-            catch(DivideByZeroException )
+            catch(DivideByZeroException ex )
             {
                 MessageBox.Show("No se puede dividir por cero", "Error");
-              
+                MessageBox.Show(ex.ToString());
+
+
             }
-            catch (OverflowException)
+            catch (OverflowException ex)
             {
                 MessageBox.Show("El número es demasiado grande o demasiado pequeño", "Error");
+                MessageBox.Show(ex.ToString());
+
             }
 
             catch (Exception ex) // <--- LA RED FINAL: Captura cualquier otro tipo de excepción que no haya sido manejada por los catch anteriores. BUENA PRACTICA.
             {
                 MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error Crítico");
+                MessageBox.Show(ex.ToString());
+
             }
             finally
             {
