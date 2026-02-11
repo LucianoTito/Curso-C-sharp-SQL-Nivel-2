@@ -16,7 +16,8 @@ namespace Manejo_de_Excepciones
             {    
                 numero1 = int.Parse(PrimerNumero.Text);
                 numero2 = int.Parse(SegundoNumero.Text);
-                resultado = numero1 + numero2;
+                resultado = numero1 / numero2;
+                //resultado = numero1 + numero2; // <-- Para probar el manejo de excepciones, puedes cambiar la operación a suma, resta o multiplicación, y luego volver a división para probar cada caso.
                 lbResultado.Text = " = " + resultado;
             }
             catch (FormatException ex)//Genera un objeto de tipo excepción, y lo guarda en la variable ex, para luego mostrar el mensaje de error.
@@ -33,6 +34,11 @@ namespace Manejo_de_Excepciones
             catch (OverflowException)
             {
                 MessageBox.Show("El número es demasiado grande o demasiado pequeño", "Error");
+            }
+
+            catch (Exception ex) // <--- LA RED FINAL: Captura cualquier otro tipo de excepción que no haya sido manejada por los catch anteriores. BUENA PRACTICA.
+            {
+                MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error Crítico");
             }
             finally
             {
