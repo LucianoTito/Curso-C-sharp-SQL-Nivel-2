@@ -12,7 +12,7 @@ namespace Finally_y_Throw_en_Excepciones
             int numero1, numero2, resultado;
             try
             {
-                // 1. NUESTRA REGLA DE NEGOCIO (El uso del throw)
+                // 1. REGLA DE NEGOCIO (El uso del throw)
                 // Revisamos si alguno de los TextBox está vacío
                 if (txtNum1.Text == "" || txtNum2.Text == "")
                 {
