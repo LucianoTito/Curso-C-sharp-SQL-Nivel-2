@@ -6,10 +6,16 @@ namespace Conexiones_con_POKEMON_DB
 {
     internal class Pokemon
     {
+        // Propiedades que mapean las columnas de la Base de Datos
+        // Es buena práctica inicializarlas para evitar valores nulos (NullReferenceException)
         public int PokedexNumero { get; set; }
-        public string Nombre { get; set; } = string.Empty; //Inicializo la propiedad Nombre con un valor por defecto de cadena vacía para evitar problemas de null reference
-        public string Tipo { get; set; } = string.Empty; //Inicializo la propiedad Tipo con un valor por defecto de cadena vacía para evitar problemas de null referenceS
 
+        // Inicializamos con string.Empty para que nunca sea null al arrancar
+        public string Nombre { get; set; } = string.Empty;
 
+        public string Tipo { get; set; } = string.Empty;
+
+        // Aquí podríamos agregar una propiedad para la imagen más adelante
+        // public string UrlImagen { get; set; }
     }
 }
