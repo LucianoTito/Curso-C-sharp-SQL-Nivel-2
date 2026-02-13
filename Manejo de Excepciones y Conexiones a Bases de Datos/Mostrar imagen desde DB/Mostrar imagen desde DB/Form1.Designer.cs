@@ -40,7 +40,7 @@
             dgvPokemons.Location = new Point(26, 12);
             dgvPokemons.Name = "dgvPokemons";
             dgvPokemons.RowHeadersWidth = 51;
-            dgvPokemons.Size = new Size(640, 714);
+            dgvPokemons.Size = new Size(640, 761);
             dgvPokemons.TabIndex = 0;
             dgvPokemons.SelectionChanged += dgvPokemons_SelectionChanged;
             // 
@@ -48,7 +48,7 @@
             // 
             pbxPokemon.Location = new Point(672, 12);
             pbxPokemon.Name = "pbxPokemon";
-            pbxPokemon.Size = new Size(554, 714);
+            pbxPokemon.Size = new Size(754, 761);
             pbxPokemon.SizeMode = PictureBoxSizeMode.StretchImage;
             pbxPokemon.TabIndex = 1;
             pbxPokemon.TabStop = false;
@@ -57,10 +57,11 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1253, 738);
+            ClientSize = new Size(1582, 801);
             Controls.Add(pbxPokemon);
             Controls.Add(dgvPokemons);
             Name = "frmPokemon";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Cargar imagen en Pokemon DB";
             Load += frmPokemon_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgvPokemons).EndInit();
