@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mostrar_imagen_desde_DB
 {
@@ -16,3 +17,5 @@ namespace Mostrar_imagen_desde_DB
         public string UrlImagen { get; set; } = string.Empty;
     }
 }
+
+
