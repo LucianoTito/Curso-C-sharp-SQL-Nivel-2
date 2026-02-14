@@ -1,0 +1,3 @@
+--SELECT Numero, Nombre, Descripcion, UrlImagen FROM dbo.POKEMONS
+--UPDATE dbo.POKEMONS SET UrlImagen = '' WHERE id = 1
+--UPDATE dbo.POKEMONS SET UrlImagen = 'https://pbs.twimg.com/media/EGENnxBUcAAqq04.png' WHERE Nombre = 'Pikachu'
