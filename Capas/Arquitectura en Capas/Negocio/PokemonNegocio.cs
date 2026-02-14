@@ -1,20 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-//Librería necesaria para conectarse a SQL Server.
-using Microsoft.Data.SqlClient;
+﻿using Dominio;
 
-namespace Lectura_de_datos_de_Diferentes_tablas_DB
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+
+
+
+namespace Negocio
 {
-    internal class PokemonNegocio
+    public class PokemonNegocio
     {
         //Método que va a la base de datos y devuelve la lista de pokemons
 
         public List<Pokemon> ObtenerPokemones()
         {
+
+            // 1. La Lista Contenedora:
+            // Preparamos la caja vacía donde guardaremos los objetos que traigamos de la DB para retornarlos al final.
             List<Pokemon> listaPokemons = new List<Pokemon>();
+
+            // 2. El Objeto Conexión (El Puente):
+            // Es el encargado de establecer el vínculo físico con SQL Server.
+            // Se declara aquí para poder configurarlo en el 'try' y cerrarlo en el 'finally'.
             SqlConnection conexion = new SqlConnection();
+
+            // 3. El Objeto Comando (El Mensajero):
+            // Es el objeto que transportará nuestra consulta SQL (SELECT, INSERT, etc.) a través de la conexión.
             SqlCommand comando = new SqlCommand();
+
+            // 4. El Objeto Lector (El Cursor):
+            // Es quien recibe el resultado de la consulta. Funciona como un flujo de datos de solo lectura y avance rápido.
+            // Nota: No se hace 'new SqlDataReader()' porque quien lo instancia es el comando.ExecuteReader().
             SqlDataReader lector;
 
             try
@@ -26,8 +46,8 @@ namespace Lectura_de_datos_de_Diferentes_tablas_DB
                 comando.CommandType = System.Data.CommandType.Text;
 
                 //3.Escribimos la consulta
-                // Aseguramos que la columna Numero se seleccione en la consulta (coincide con la propiedad Pokemon.Numero)
-                comando.CommandText = "SELECT P.Numero, P.Nombre, P.Descripcion, P.UrlImagen,E.Descripcion AS Tipo, D.Descripcion AS Debilidad FROM dbo.ELEMENTOS E, POKEMONS P, ELEMENTOS D  WHERE E.Id = P.IdTipo And D.Id = P.IdDebilidad";
+                // Consulta actualizada con INNER JOIN (Estándar ANSI-92)
+                comando.CommandText = "SELECT P.Numero, P.Nombre, P.Descripcion, P.UrlImagen,E.Descripcion AS Tipo, D.Descripcion AS Debilidad FROM dbo.ELEMENTOS E, POKEMONS P, ELEMENTOS D WHERE E.Id = P.IdTipo And D.Id = P.IdDebilidad";
 
                 //4.Conectamos el comando a la conexión
                 comando.Connection = conexion;
@@ -38,50 +58,33 @@ namespace Lectura_de_datos_de_Diferentes_tablas_DB
                 //6.Ejecutamos la lectura
                 lector = comando.ExecuteReader();
 
-                //7. Recorremos fila por fila lo que trajo la base de datos
+                //7.Recorremos fila por fila lo que trajo la base de datos
                 while (lector.Read())
                 {
                     Pokemon aux = new Pokemon();
 
-                    //Mapeo de datos: DB --> Objeto c#
-                    //Usar métodos Get* y comprobar IsDBNull para evitar excepciones y advertencias de nulabilidad
+                    //Mapeo de datos: DB --> Objeto C#
+                    //Usamos métodos Get* y comprobar IsDBNull para evitar excepciones y advertencias de nulabilidad
                     if (!lector.IsDBNull(0))
-                        aux.Numero = lector.GetInt32(0); //Columna 0 -> Numero
-
+                        aux.Numero = lector.GetInt32(0); //Columna 0
                     if (!lector.IsDBNull(1))
                         aux.Nombre = lector.GetString(1);
-
                     if (!lector.IsDBNull(2))
                         aux.Descripcion = lector.GetString(2);
-
-                    //Validación para UrlImagen
                     if (!lector.IsDBNull(3))
-                    {
                         aux.UrlImagen = lector.GetString(3);
-                    }
-                    aux.Tipo = new Elemento();
-
                     if (!lector.IsDBNull(4))
-                    { 
-                        aux.Tipo.Decripcion = (String)lector.GetString(4);
-                    }
-
-                   
-
-                    aux.Debilidad = new Elemento();
-
+                        aux.Tipo.Descripcion = (String)lector.GetString(4);               
                     if (!lector.IsDBNull(5))
-                    {
-                        aux.Debilidad.Decripcion = (String)lector.GetString(5);
-                    }
+                        aux.Debilidad.Descripcion = (String)lector.GetString(5);
+
+                    // Agregamos el objeto 'aux' ya cargado con datos a la lista final.
                     listaPokemons.Add(aux);
                 }
                 return listaPokemons;
             }
             catch (Exception ex)
             {
-                // Si hay error, lo mostramos en la consola de salida y lo relanzamos
-                // para que el Formulario se entere y le avise al usuario.
 
                 Console.WriteLine("Error al obtener pokemones: " + ex.Message);
                 throw;
@@ -89,13 +92,10 @@ namespace Lectura_de_datos_de_Diferentes_tablas_DB
             }
             finally
             {
-
                 if (conexion.State == System.Data.ConnectionState.Open)
-
                 {
                     conexion.Close();
                 }
-
             }
         }
     }

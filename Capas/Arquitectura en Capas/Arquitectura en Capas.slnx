@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Arquitectura en Capas/Arquitectura en Capas.csproj" />
+  <Project Path="Dominio/Dominio.csproj" />
+  <Project Path="Negocio/Negocio.csproj" />
+</Solution>

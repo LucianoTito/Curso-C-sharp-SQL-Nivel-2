@@ -1,4 +1,4 @@
-﻿namespace Lectura_de_datos_de_Diferentes_tablas_DB
+﻿namespace Arquitectura_en_Capas
 {
     partial class frmPokemon
     {
@@ -28,49 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvPokemons = new DataGridView();
             pbxPokemon = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
+            dgvPokemons = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
             SuspendLayout();
+            // 
+            // pbxPokemon
+            // 
+            pbxPokemon.Location = new Point(830, 63);
+            pbxPokemon.Name = "pbxPokemon";
+            pbxPokemon.Size = new Size(544, 463);
+            pbxPokemon.TabIndex = 0;
+            pbxPokemon.TabStop = false;
             // 
             // dgvPokemons
             // 
             dgvPokemons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPokemons.Location = new Point(32, 42);
+            dgvPokemons.Location = new Point(12, 45);
             dgvPokemons.Name = "dgvPokemons";
             dgvPokemons.RowHeadersWidth = 51;
-            dgvPokemons.Size = new Size(840, 719);
-            dgvPokemons.TabIndex = 0;
+            dgvPokemons.Size = new Size(812, 744);
+            dgvPokemons.TabIndex = 1;
             dgvPokemons.SelectionChanged += dgvPokemons_SelectionChanged;
-            // 
-            // pbxPokemon
-            // 
-            pbxPokemon.Location = new Point(896, 51);
-            pbxPokemon.Name = "pbxPokemon";
-            pbxPokemon.Size = new Size(480, 719);
-            pbxPokemon.TabIndex = 1;
-            pbxPokemon.TabStop = false;
             // 
             // frmPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1582, 801);
-            Controls.Add(pbxPokemon);
+            ClientSize = new Size(1386, 841);
             Controls.Add(dgvPokemons);
+            Controls.Add(pbxPokemon);
             Name = "frmPokemon";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Lectura de diferentes tablas";
+            Text = "Arquitectura en capas";
             Load += frmPokemon_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvPokemons).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPokemons).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dgvPokemons;
         private PictureBox pbxPokemon;
+        private DataGridView dgvPokemons;
     }
 }

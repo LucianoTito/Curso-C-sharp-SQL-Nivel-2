@@ -17,11 +17,10 @@ namespace Lectura_de_datos_de_Diferentes_tablas_DB
         public string Descripcion { get; set; } = string.Empty;
         public string UrlImagen { get; set; } = string.Empty;
 
-        public Elemento Tipo { get; set; } 
+        // Inicializar las propiedades de referencia no anulables para evitar CS8618
+        public Elemento Tipo { get; set; } = new Elemento();
 
-        public Elemento Debilidad {  get; set; }
-
-
-
+        // Inicializar las propiedades de referencia no anulables para evitar CS8618
+        public Elemento Debilidad { get; set; } = new Elemento();
     }
 }
