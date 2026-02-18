@@ -13,12 +13,20 @@ namespace Arquitectura_en_Capas
         public frmPokemon()
         {
             InitializeComponent();
+
+            // --- Ajustes de visualización ---
+            // Alto de las filas (valor inicial / mínimo)
+            dgvPokemons.RowTemplate.Height = 100;
+
+
+            // Permitir que las filas ajusten su altura automáticamente según el contenido
+            dgvPokemons.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         // ---------------------------------------------------------
-        // EVENTO LOAD
+        // MÉTODO CARGAR POKEMON 
         // ---------------------------------------------------------
-        private void frmPokemon_Load(object sender, EventArgs e)
+        private void cargarPokemon()
         {
             PokemonNegocio negocio = new PokemonNegocio();
             try
@@ -32,17 +40,6 @@ namespace Arquitectura_en_Capas
 
                 // Enlazamos la grilla
                 dgvPokemons.DataSource = listaPokemons;
-
-                // Ocultamos la columna de Url
-                if (dgvPokemons.Columns["UrlImagen"] != null)
-                {
-                    dgvPokemons.Columns["UrlImagen"].Visible = false;
-                }
-
-                // --- Ajustes de visualización ---
-                // Alto de las filas (valor inicial / mínimo)
-                dgvPokemons.RowTemplate.Height = 100;
-
                 // Que la columna Descripcion ocupe todo el espacio disponible
                 if (dgvPokemons.Columns["Descripcion"] != null)
                 {
@@ -51,8 +48,14 @@ namespace Arquitectura_en_Capas
                     dgvPokemons.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 }
 
-                // Permitir que las filas ajusten su altura automáticamente según el contenido
-                dgvPokemons.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+                // Ocultamos la columna de Url
+                if (dgvPokemons.Columns["UrlImagen"] != null)
+                {
+                    dgvPokemons.Columns["UrlImagen"].Visible = false;
+                }
+
+
 
                 // Cargar imagen del primer pokemon por defecto
                 if (listaPokemons != null && listaPokemons.Count > 0 && listaPokemons[0] != null)
@@ -68,6 +71,14 @@ namespace Arquitectura_en_Capas
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        // ---------------------------------------------------------
+        // EVENTO LOAD
+        // ---------------------------------------------------------
+        private void frmPokemon_Load(object sender, EventArgs e)
+        {
+            cargarPokemon();
         }
 
         // ---------------------------------------------------------
@@ -94,8 +105,9 @@ namespace Arquitectura_en_Capas
             frmAltaPokemon alta = new frmAltaPokemon();
             alta.ShowDialog();
 
-            // Recargamos la lista al volver
-            frmPokemon_Load(sender, e);
+            cargarPokemon();
+
+       
         }
 
         // ---------------------------------------------------------

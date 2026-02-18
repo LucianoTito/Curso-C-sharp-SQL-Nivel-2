@@ -40,6 +40,10 @@
             lblDebilidad = new Label();
             cbxTipo = new ComboBox();
             cbxDebilidad = new ComboBox();
+            lblUrlImagen = new Label();
+            tbxUrlImagen = new TextBox();
+            pbxPokemon = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
             SuspendLayout();
             // 
             // lblNumero
@@ -73,26 +77,26 @@
             // 
             txtNumero.Location = new Point(134, 37);
             txtNumero.Name = "txtNumero";
-            txtNumero.Size = new Size(153, 34);
+            txtNumero.Size = new Size(242, 34);
             txtNumero.TabIndex = 3;
             // 
             // txtNombre
             // 
             txtNombre.Location = new Point(134, 90);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(153, 34);
+            txtNombre.Size = new Size(242, 34);
             txtNombre.TabIndex = 4;
             // 
             // txtDescripcion
             // 
             txtDescripcion.Location = new Point(134, 142);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(153, 34);
+            txtDescripcion.Size = new Size(242, 34);
             txtDescripcion.TabIndex = 5;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(207, 305);
+            btnCancelar.Location = new Point(242, 369);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(132, 55);
             btnCancelar.TabIndex = 6;
@@ -102,7 +106,7 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(12, 305);
+            btnAceptar.Location = new Point(45, 369);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(132, 55);
             btnAceptar.TabIndex = 7;
@@ -134,7 +138,7 @@
             cbxTipo.FormattingEnabled = true;
             cbxTipo.Location = new Point(136, 190);
             cbxTipo.Name = "cbxTipo";
-            cbxTipo.Size = new Size(151, 36);
+            cbxTipo.Size = new Size(240, 36);
             cbxTipo.TabIndex = 11;
             // 
             // cbxDebilidad
@@ -143,14 +147,42 @@
             cbxDebilidad.FormattingEnabled = true;
             cbxDebilidad.Location = new Point(136, 237);
             cbxDebilidad.Name = "cbxDebilidad";
-            cbxDebilidad.Size = new Size(151, 36);
+            cbxDebilidad.Size = new Size(240, 36);
             cbxDebilidad.TabIndex = 12;
+            // 
+            // lblUrlImagen
+            // 
+            lblUrlImagen.AutoSize = true;
+            lblUrlImagen.Location = new Point(-2, 286);
+            lblUrlImagen.Name = "lblUrlImagen";
+            lblUrlImagen.Size = new Size(139, 28);
+            lblUrlImagen.TabIndex = 13;
+            lblUrlImagen.Text = "Url de Imagen:";
+            // 
+            // tbxUrlImagen
+            // 
+            tbxUrlImagen.Location = new Point(136, 286);
+            tbxUrlImagen.Name = "tbxUrlImagen";
+            tbxUrlImagen.Size = new Size(240, 34);
+            tbxUrlImagen.TabIndex = 14;
+            // 
+            // pbxPokemon
+            // 
+            pbxPokemon.Location = new Point(437, 26);
+            pbxPokemon.Name = "pbxPokemon";
+            pbxPokemon.Size = new Size(572, 475);
+            pbxPokemon.SizeMode = PictureBoxSizeMode.Zoom;
+            pbxPokemon.TabIndex = 15;
+            pbxPokemon.TabStop = false;
             // 
             // frmAltaPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(851, 726);
+            ClientSize = new Size(1160, 726);
+            Controls.Add(pbxPokemon);
+            Controls.Add(tbxUrlImagen);
+            Controls.Add(lblUrlImagen);
             Controls.Add(cbxDebilidad);
             Controls.Add(cbxTipo);
             Controls.Add(lblDebilidad);
@@ -167,6 +199,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Nuevo Pokemon";
             Load += frmAltaPokemon_Load;
+            ((System.ComponentModel.ISupportInitialize)pbxPokemon).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -185,5 +218,8 @@
         private Label lblDebilidad;
         private ComboBox cbxTipo;
         private ComboBox cbxDebilidad;
+        private Label lblUrlImagen;
+        private TextBox tbxUrlImagen;
+        private PictureBox pbxPokemon;
     }
 }

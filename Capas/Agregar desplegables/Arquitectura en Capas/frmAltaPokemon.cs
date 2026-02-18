@@ -67,7 +67,7 @@ namespace Arquitectura_en_Capas
                 cbxTipo.DataSource = negocio.listar();
                 cbxDebilidad.DataSource = negocio.listar();
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
