@@ -34,6 +34,9 @@
             btnModificar = new Button();
             btnEliminarFisico = new Button();
             btnElimnarLogica = new Button();
+            lblFiltro = new Label();
+            txtFiltro = new TextBox();
+            btnFiltrar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
             SuspendLayout();
@@ -99,13 +102,46 @@
             btnElimnarLogica.TabIndex = 5;
             btnElimnarLogica.Text = "Eliminar Lógico";
             btnElimnarLogica.UseVisualStyleBackColor = true;
-            btnElimnarLogica.Click += this.btnEliminarLogico_Click;
+            btnElimnarLogica.Click += btnEliminarLogico_Click;
+            // 
+            // lblFiltro
+            // 
+            lblFiltro.AutoSize = true;
+            lblFiltro.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFiltro.Location = new Point(138, 14);
+            lblFiltro.Name = "lblFiltro";
+            lblFiltro.Size = new Size(67, 28);
+            lblFiltro.TabIndex = 6;
+            lblFiltro.Text = "Filtro:";
+            // 
+            // txtFiltro
+            // 
+            txtFiltro.BackColor = SystemColors.Menu;
+            txtFiltro.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtFiltro.ForeColor = Color.Black;
+            txtFiltro.Location = new Point(224, 8);
+            txtFiltro.Name = "txtFiltro";
+            txtFiltro.Size = new Size(247, 34);
+            txtFiltro.TabIndex = 7;
+            // 
+            // btnFiltrar
+            // 
+            btnFiltrar.Location = new Point(488, 8);
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Size = new Size(129, 35);
+            btnFiltrar.TabIndex = 8;
+            btnFiltrar.Text = "BUSCAR";
+            btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Click += btnFiltrar_Click;
             // 
             // frmPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1782, 951);
+            Controls.Add(btnFiltrar);
+            Controls.Add(txtFiltro);
+            Controls.Add(lblFiltro);
             Controls.Add(btnElimnarLogica);
             Controls.Add(btnEliminarFisico);
             Controls.Add(btnModificar);
@@ -119,7 +155,10 @@
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvPokemons).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
+
+
 
         #endregion
 
@@ -129,5 +168,8 @@
         private Button btnModificar;
         private Button btnEliminarFisico;
         private Button btnElimnarLogica;
+        private Label lblFiltro;
+        private TextBox txtFiltro;
+        private Button btnFiltrar;
     }
 }
