@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using Dominio;
 using Negocio;
 
@@ -157,6 +154,17 @@ namespace Arquitectura_en_Capas
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            eliminar(logico: false);
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+          eliminar(logico: true);
+            
+        }
+
+        private void eliminar (bool logico = false)
+        {
             PokemonNegocio negocio = new PokemonNegocio();
             Pokemon seleccionado;
             try
@@ -178,7 +186,12 @@ namespace Arquitectura_en_Capas
                     // Si el usuario presiona "Sí", entonces eliminamos
                     if (respuesta == DialogResult.Yes)
                     {
-                        negocio.EliminarPokemon(seleccionado.Id);
+                        if(logico)
+                        {
+                            negocio.EliminarLogico(seleccionado.Id);
+                        }
+                        else
+                            negocio.EliminarPokemon(seleccionado.Id);
                         cargarPokemon(); // Recargamos la grilla para que desaparezca visualmente
                     }
                 }

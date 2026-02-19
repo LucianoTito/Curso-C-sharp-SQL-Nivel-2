@@ -48,7 +48,7 @@ namespace Negocio
                 //3.Escribimos la consulta
                 // Consulta actualizada con INNER JOIN 
                 // Agregamos P.IdTipo, P.IdDebilidad y P.Id al final del SELECT
-                comando.CommandText = "SELECT P.Numero, P.Nombre, P.Descripcion, P.UrlImagen, E.Descripcion AS Tipo, D.Descripcion AS Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM dbo.ELEMENTOS E, POKEMONS P, ELEMENTOS D WHERE E.Id = P.IdTipo And D.Id = P.IdDebilidad";
+                comando.CommandText = "SELECT P.Numero, P.Nombre, P.Descripcion, P.UrlImagen, E.Descripcion AS Tipo, D.Descripcion AS Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM dbo.ELEMENTOS E, POKEMONS P, ELEMENTOS D WHERE E.Id = P.IdTipo And D.Id = P.IdDebilidad And P.Activo = 1";
                 //4.Conectamos el comando a la conexión
                 comando.Connection = conexion;
 
@@ -193,5 +193,24 @@ namespace Negocio
             }
         }
 
+        public void EliminarLogico(int Id)
+        {
+            Acceso_a_datos datos = new Acceso_a_datos();
+            try
+            {
+                // UPDATE para marcar como inactivo en lugar de borrar
+                datos.SetearConsulta("UPDATE POKEMONS SET Activo = 0 WHERE Id = @Id");
+                datos.SetearParametro("@Id", Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@
             btnAgregar = new Button();
             btnModificar = new Button();
             btnEliminarFisico = new Button();
+            btnElimnarLogica = new Button();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
             SuspendLayout();
@@ -84,17 +85,28 @@
             // 
             btnEliminarFisico.Location = new Point(303, 865);
             btnEliminarFisico.Name = "btnEliminarFisico";
-            btnEliminarFisico.Size = new Size(125, 61);
+            btnEliminarFisico.Size = new Size(184, 61);
             btnEliminarFisico.TabIndex = 4;
-            btnEliminarFisico.Text = "EliminarF";
+            btnEliminarFisico.Text = "Eliminar Fisico";
             btnEliminarFisico.UseVisualStyleBackColor = true;
             btnEliminarFisico.Click += btnEliminarFisico_Click;
+            // 
+            // btnElimnarLogica
+            // 
+            btnElimnarLogica.Location = new Point(488, 865);
+            btnElimnarLogica.Name = "btnElimnarLogica";
+            btnElimnarLogica.Size = new Size(184, 61);
+            btnElimnarLogica.TabIndex = 5;
+            btnElimnarLogica.Text = "Eliminar Lógico";
+            btnElimnarLogica.UseVisualStyleBackColor = true;
+            btnElimnarLogica.Click += this.btnEliminarLogico_Click;
             // 
             // frmPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1782, 951);
+            Controls.Add(btnElimnarLogica);
             Controls.Add(btnEliminarFisico);
             Controls.Add(btnModificar);
             Controls.Add(btnAgregar);
@@ -116,5 +128,6 @@
         private Button btnAgregar;
         private Button btnModificar;
         private Button btnEliminarFisico;
+        private Button btnElimnarLogica;
     }
 }
