@@ -59,7 +59,7 @@ namespace Arquitectura_en_Capas
                 }
                 var colId = dgvPokemons.Columns["Id"];
                 if (colId != null)
-                    { colId.Visible = false; }
+                { colId.Visible = false; }
 
 
 
@@ -152,6 +152,46 @@ namespace Arquitectura_en_Capas
             frmAltaPokemon modificarPokemon = new frmAltaPokemon(seleccionado); //LINEA QUE NO ENTIENDO
             modificarPokemon.ShowDialog();
             cargarPokemon();
-;        }
+            ;
+        }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            Pokemon seleccionado;
+            try
+            {
+                // Validamos que haya una fila seleccionada antes de intentar hacer nada
+                if (dgvPokemons.CurrentRow != null)
+                {
+                    // Extraemos el objeto
+                    seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+
+                    // PEDIMOS CONFIRMACIÓN AL USUARIO
+                    // Esto abre una ventanita con los botones "Sí" y "No"
+                    DialogResult respuesta = MessageBox.Show(
+                        "¿Estás seguro que deseas eliminar el Pokémon " + seleccionado.Nombre + "?",
+                        "Eliminando",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    // Si el usuario presiona "Sí", entonces eliminamos
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        negocio.EliminarPokemon(seleccionado.Id);
+                        cargarPokemon(); // Recargamos la grilla para que desaparezca visualmente
+                    }
+                }
+                else
+                {
+                    // Si el usuario hizo clic en eliminar pero la grilla estaba vacía
+                    MessageBox.Show("Por favor, seleccione un Pokémon de la grilla para eliminar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

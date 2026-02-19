@@ -164,5 +164,34 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
+        public void EliminarPokemon(int Id)
+        {
+            // 1. Instanciamos afuera para poder acceder a 'datos' desde el finally
+            Acceso_a_datos datos = new Acceso_a_datos();
+            try
+            {
+                // 2. Consulta destructiva: DELETE
+                // IMPORTANTE: Siempre usar WHERE en un DELETE, de lo contrario borras toda la tabla.
+                datos.SetearConsulta("DELETE FROM POKEMONS WHERE Id = @Id");
+
+                // 3. Pasamos el parámetro
+                datos.SetearParametro("@Id", Id);
+
+                // 4. Ejecutamos
+                datos.EjecutarAccion();
+            }
+            catch (Exception)
+            {
+                // Usamos throw; en lugar de throw ex; por buenas prácticas (mantiene el stack trace)
+                throw;
+            }
+            finally
+            {
+                // 5. Cerramos la puerta SIEMPRE
+                datos.CerrarConexion();
+            }
+        }
+
     }
 }

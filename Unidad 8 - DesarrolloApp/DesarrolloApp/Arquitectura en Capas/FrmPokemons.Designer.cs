@@ -32,6 +32,7 @@
             dgvPokemons = new DataGridView();
             btnAgregar = new Button();
             btnModificar = new Button();
+            btnEliminarFisico = new Button();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPokemons).BeginInit();
             SuspendLayout();
@@ -79,11 +80,22 @@
             btnModificar.UseVisualStyleBackColor = true;
             btnModificar.Click += btnModificar_Click;
             // 
+            // btnEliminarFisico
+            // 
+            btnEliminarFisico.Location = new Point(303, 865);
+            btnEliminarFisico.Name = "btnEliminarFisico";
+            btnEliminarFisico.Size = new Size(125, 61);
+            btnEliminarFisico.TabIndex = 4;
+            btnEliminarFisico.Text = "EliminarF";
+            btnEliminarFisico.UseVisualStyleBackColor = true;
+            btnEliminarFisico.Click += btnEliminarFisico_Click;
+            // 
             // frmPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1782, 951);
+            Controls.Add(btnEliminarFisico);
             Controls.Add(btnModificar);
             Controls.Add(btnAgregar);
             Controls.Add(dgvPokemons);
@@ -103,5 +115,6 @@
         private DataGridView dgvPokemons;
         private Button btnAgregar;
         private Button btnModificar;
+        private Button btnEliminarFisico;
     }
 }
