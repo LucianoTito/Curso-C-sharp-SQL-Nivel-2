@@ -78,28 +78,28 @@
             txtNumero.Location = new Point(134, 37);
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(242, 34);
-            txtNumero.TabIndex = 3;
+            txtNumero.TabIndex = 0;
             // 
             // txtNombre
             // 
             txtNombre.Location = new Point(134, 90);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(242, 34);
-            txtNombre.TabIndex = 4;
+            txtNombre.TabIndex = 1;
             // 
             // txtDescripcion
             // 
             txtDescripcion.Location = new Point(134, 142);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(242, 34);
-            txtDescripcion.TabIndex = 5;
+            txtDescripcion.TabIndex = 2;
             // 
             // btnCancelar
             // 
             btnCancelar.Location = new Point(242, 369);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(132, 55);
-            btnCancelar.TabIndex = 6;
+            btnCancelar.TabIndex = 7;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
@@ -109,7 +109,7 @@
             btnAceptar.Location = new Point(45, 369);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(132, 55);
-            btnAceptar.TabIndex = 7;
+            btnAceptar.TabIndex = 6;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
             btnAceptar.Click += btnAceptar_Click;
@@ -139,7 +139,7 @@
             cbxTipo.Location = new Point(136, 190);
             cbxTipo.Name = "cbxTipo";
             cbxTipo.Size = new Size(240, 36);
-            cbxTipo.TabIndex = 11;
+            cbxTipo.TabIndex = 3;
             // 
             // cbxDebilidad
             // 
@@ -148,7 +148,7 @@
             cbxDebilidad.Location = new Point(136, 237);
             cbxDebilidad.Name = "cbxDebilidad";
             cbxDebilidad.Size = new Size(240, 36);
-            cbxDebilidad.TabIndex = 12;
+            cbxDebilidad.TabIndex = 4;
             // 
             // lblUrlImagen
             // 
@@ -164,7 +164,8 @@
             tbxUrlImagen.Location = new Point(136, 286);
             tbxUrlImagen.Name = "tbxUrlImagen";
             tbxUrlImagen.Size = new Size(240, 34);
-            tbxUrlImagen.TabIndex = 14;
+            tbxUrlImagen.TabIndex = 5;
+            tbxUrlImagen.Leave += tbxUrlImagen_Leave;
             // 
             // pbxPokemon
             // 

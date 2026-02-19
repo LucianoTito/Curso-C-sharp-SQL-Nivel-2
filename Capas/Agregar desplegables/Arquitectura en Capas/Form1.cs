@@ -40,19 +40,22 @@ namespace Arquitectura_en_Capas
 
                 // Enlazamos la grilla
                 dgvPokemons.DataSource = listaPokemons;
+
                 // Que la columna Descripcion ocupe todo el espacio disponible
-                if (dgvPokemons.Columns["Descripcion"] != null)
+                var colDescripcion = dgvPokemons.Columns["Descripcion"];
+                if (colDescripcion != null)
                 {
-                    dgvPokemons.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    colDescripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     // Permitir salto de línea en la celda específica de Descripcion
-                    dgvPokemons.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                    colDescripcion.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 }
 
 
                 // Ocultamos la columna de Url
-                if (dgvPokemons.Columns["UrlImagen"] != null)
+                var colUrl = dgvPokemons.Columns["UrlImagen"];
+                if (colUrl != null)
                 {
-                    dgvPokemons.Columns["UrlImagen"].Visible = false;
+                    colUrl.Visible = false;
                 }
 
 

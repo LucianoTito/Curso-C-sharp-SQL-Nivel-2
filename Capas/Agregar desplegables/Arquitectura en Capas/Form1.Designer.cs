@@ -37,15 +37,16 @@
             // 
             // pbxPokemon
             // 
-            pbxPokemon.Location = new Point(830, 63);
+            pbxPokemon.Location = new Point(1147, 45);
             pbxPokemon.Name = "pbxPokemon";
-            pbxPokemon.Size = new Size(544, 463);
+            pbxPokemon.Size = new Size(606, 539);
             pbxPokemon.SizeMode = PictureBoxSizeMode.Zoom;
             pbxPokemon.TabIndex = 0;
             pbxPokemon.TabStop = false;
             // 
             // dgvPokemons
             // 
+            dgvPokemons.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvPokemons.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPokemons.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvPokemons.Location = new Point(12, 45);
@@ -53,13 +54,13 @@
             dgvPokemons.Name = "dgvPokemons";
             dgvPokemons.RowHeadersWidth = 51;
             dgvPokemons.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPokemons.Size = new Size(812, 662);
+            dgvPokemons.Size = new Size(1129, 812);
             dgvPokemons.TabIndex = 1;
             dgvPokemons.SelectionChanged += dgvPokemons_SelectionChanged;
             // 
             // btnAgregar
             // 
-            btnAgregar.Location = new Point(42, 731);
+            btnAgregar.Location = new Point(12, 863);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(125, 61);
             btnAgregar.TabIndex = 2;
@@ -71,7 +72,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1386, 841);
+            ClientSize = new Size(1782, 951);
             Controls.Add(btnAgregar);
             Controls.Add(dgvPokemons);
             Controls.Add(pbxPokemon);

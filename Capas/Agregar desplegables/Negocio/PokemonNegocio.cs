@@ -104,9 +104,10 @@ namespace Negocio
             Acceso_a_datos datos = new Acceso_a_datos();
             try
             {
-                datos.SetearConsulta("INSERT INTO POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad) VALUES ("+ nuevoPokemon.Numero+ ", '" + nuevoPokemon.Nombre + "', '" + nuevoPokemon.Descripcion + "', 1 , @IdTipo, @IdDebilidad )");
+                datos.SetearConsulta("INSERT INTO POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad, UrlImagen) VALUES ("+ nuevoPokemon.Numero+ ", '" + nuevoPokemon.Nombre + "', '" + nuevoPokemon.Descripcion + "', 1 , @IdTipo, @IdDebilidad, @UrlImagen )");
                 datos.SetearParametro("@IdTipo", nuevoPokemon.Tipo.Id);
                 datos.SetearParametro("@IdDebilidad", nuevoPokemon.Debilidad.Id);
+                datos.SetearParametro("@UrlImagen", nuevoPokemon.UrlImagen);
                 datos.EjecutarAccion();
             }
             catch (Exception)
