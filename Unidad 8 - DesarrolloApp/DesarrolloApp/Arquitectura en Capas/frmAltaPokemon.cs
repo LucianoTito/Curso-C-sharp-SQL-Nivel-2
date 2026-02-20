@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Configuration;
 using Dominio;
 using Negocio;
 
@@ -174,6 +176,47 @@ namespace Arquitectura_en_Capas
             {
                 if (pbxPokemon != null)
                     pbxPokemon.Load(fallback);
+            }
+        }
+
+
+        // EVENTO: Clic en el botón de agregar imagen local
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            // 1. CREAR LA VENTANA DE EXPLORADOR:
+            // OpenFileDialog es el componente nativo de Windows que abre la típica ventanita de "Abrir archivo...".
+            OpenFileDialog archivo = new OpenFileDialog();
+
+            // 2. APLICAR EL FILTRO DE SEGURIDAD:
+            // Le decimos a la ventana que solo muestre archivos con estas extensiones específicas.
+            // El formato es: "Texto visible para el usuario | extensiones separadas por punto y coma"
+            archivo.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            // 3. MOSTRAR LA VENTANA Y ESPERAR RESPUESTA:
+            // .ShowDialog() detiene el programa y le muestra la ventana al usuario.
+            // Si el usuario elige una foto y presiona "Aceptar", el resultado es DialogResult.OK y entra al 'if'.
+            // Si presiona "Cancelar" o la 'X', simplemente no hace nada.
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                // 4. CAPTURAR LA RUTA:
+                // .FileName devuelve la ruta absoluta del archivo que eligió el usuario. 
+                // Ejemplo: "C:\Usuarios\Fotos\charizard.jpg"
+                string rutaImagen = archivo.FileName;
+
+                // 5. MOSTRAR LA RUTA EN PANTALLA:
+                // Escribimos esa ruta larguísima en el TextBox para que el usuario (o la base de datos después) la vea.
+                tbxUrlImagen.Text = rutaImagen;
+
+                // 6. CARGAR LA VISTA PREVIA:
+                // Llamamos al método que ya tenías creado para que el PictureBox dibuje la imagen en pantalla.
+                cargarImagen(rutaImagen);
+
+                // 7. GUARDAR UNA COPIA LOCAL (MAGIA DE SYSTEM.IO Y SYSTEM.CONFIGURATION):
+                // File.Copy necesita dos cosas: (De dónde saco el archivo, A dónde lo pego).
+                // - Origen: archivo.FileName (La foto original del usuario).
+                // - Destino: ConfigurationManager.AppSettings["images-folder"] (Busca en el App.config la ruta de tu carpeta de imágenes D:\...)
+                //            + archivo.SafeFileName (Le concatena solo el nombre de la foto, ej: "charizard.jpg").
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
             }
         }
     }

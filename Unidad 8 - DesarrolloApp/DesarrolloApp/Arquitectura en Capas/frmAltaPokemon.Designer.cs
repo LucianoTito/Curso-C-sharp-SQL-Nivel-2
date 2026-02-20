@@ -43,6 +43,7 @@
             lblUrlImagen = new Label();
             tbxUrlImagen = new TextBox();
             pbxPokemon = new PictureBox();
+            btnAgregarImagen = new Button();
             ((System.ComponentModel.ISupportInitialize)pbxPokemon).BeginInit();
             SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             lblNumero.AutoSize = true;
             lblNumero.Location = new Point(31, 37);
             lblNumero.Name = "lblNumero";
-            lblNumero.Size = new Size(88, 28);
+            lblNumero.Size = new Size(92, 28);
             lblNumero.TabIndex = 0;
             lblNumero.Text = "Número:";
             // 
@@ -60,7 +61,7 @@
             lblNombre.AutoSize = true;
             lblNombre.Location = new Point(30, 90);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(89, 28);
+            lblNombre.Size = new Size(92, 28);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre:";
             // 
@@ -69,7 +70,7 @@
             lblDecripcion.AutoSize = true;
             lblDecripcion.Location = new Point(12, 145);
             lblDecripcion.Name = "lblDecripcion";
-            lblDecripcion.Size = new Size(118, 28);
+            lblDecripcion.Size = new Size(122, 28);
             lblDecripcion.TabIndex = 2;
             lblDecripcion.Text = "Descripción:";
             // 
@@ -119,7 +120,7 @@
             lblTipo.AutoSize = true;
             lblTipo.Location = new Point(55, 193);
             lblTipo.Name = "lblTipo";
-            lblTipo.Size = new Size(55, 28);
+            lblTipo.Size = new Size(57, 28);
             lblTipo.TabIndex = 8;
             lblTipo.Text = "Tipo:";
             // 
@@ -128,7 +129,7 @@
             lblDebilidad.AutoSize = true;
             lblDebilidad.Location = new Point(29, 240);
             lblDebilidad.Name = "lblDebilidad";
-            lblDebilidad.Size = new Size(101, 28);
+            lblDebilidad.Size = new Size(103, 28);
             lblDebilidad.TabIndex = 10;
             lblDebilidad.Text = "Debilidad:";
             // 
@@ -155,7 +156,7 @@
             lblUrlImagen.AutoSize = true;
             lblUrlImagen.Location = new Point(-2, 286);
             lblUrlImagen.Name = "lblUrlImagen";
-            lblUrlImagen.Size = new Size(139, 28);
+            lblUrlImagen.Size = new Size(147, 28);
             lblUrlImagen.TabIndex = 13;
             lblUrlImagen.Text = "Url de Imagen:";
             // 
@@ -169,18 +170,30 @@
             // 
             // pbxPokemon
             // 
-            pbxPokemon.Location = new Point(437, 26);
+            pbxPokemon.Location = new Point(545, 25);
             pbxPokemon.Name = "pbxPokemon";
-            pbxPokemon.Size = new Size(572, 475);
+            pbxPokemon.Size = new Size(593, 486);
             pbxPokemon.SizeMode = PictureBoxSizeMode.Zoom;
             pbxPokemon.TabIndex = 15;
             pbxPokemon.TabStop = false;
+            // 
+            // btnAgregarImagen
+            // 
+            btnAgregarImagen.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAgregarImagen.Location = new Point(392, 282);
+            btnAgregarImagen.Name = "btnAgregarImagen";
+            btnAgregarImagen.Size = new Size(38, 43);
+            btnAgregarImagen.TabIndex = 16;
+            btnAgregarImagen.Text = "+";
+            btnAgregarImagen.UseVisualStyleBackColor = true;
+            btnAgregarImagen.Click += btnAgregarImagen_Click;
             // 
             // frmAltaPokemon
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 726);
+            Controls.Add(btnAgregarImagen);
             Controls.Add(pbxPokemon);
             Controls.Add(tbxUrlImagen);
             Controls.Add(lblUrlImagen);
@@ -196,6 +209,8 @@
             Controls.Add(lblDecripcion);
             Controls.Add(lblNombre);
             Controls.Add(lblNumero);
+            Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "frmAltaPokemon";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Nuevo Pokemon";
@@ -222,5 +237,6 @@
         private Label lblUrlImagen;
         private TextBox tbxUrlImagen;
         private PictureBox pbxPokemon;
+        private Button btnAgregarImagen;
     }
 }
