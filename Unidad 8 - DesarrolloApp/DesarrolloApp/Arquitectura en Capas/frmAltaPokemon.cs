@@ -20,6 +20,9 @@ namespace Arquitectura_en_Capas
         // Si alguien le mete un objeto aquí, la ventana sabe que debe MODIFICAR.
         private Pokemon pokemon = null;
 
+        // ---> AGREGAMOS ESTO: La memoria para guardar temporalmente la foto elegida
+        private OpenFileDialog archivo = null;
+
         // ---> CONSTRUCTOR 1: AGREGAR
         public frmAltaPokemon()
         {
@@ -103,6 +106,14 @@ namespace Arquitectura_en_Capas
                 {
                     negocio.AgregarPokemon(pokemon);
                     MessageBox.Show("Pokémon agregado exitosamente.");
+                }
+                // 4. GUARDAR LA IMAGEN LOCAL (SI ES QUE ELIGIÓ UNA)
+                // Verificamos que 'archivo' no sea null (es decir, que sí tocó el botón de agregar imagen)
+                // y que la ruta no sea una web (http) para que no explote el File.Copy
+                if (archivo != null && !(tbxUrlImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    // Le agregamos un 'true' al final. Esto significa que si ya existe una foto con ese nombre, la sobrescriba sin dar error.
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
                 }
 
                 Close();
@@ -216,7 +227,7 @@ namespace Arquitectura_en_Capas
                 // - Origen: archivo.FileName (La foto original del usuario).
                 // - Destino: ConfigurationManager.AppSettings["images-folder"] (Busca en el App.config la ruta de tu carpeta de imágenes D:\...)
                 //            + archivo.SafeFileName (Le concatena solo el nombre de la foto, ej: "charizard.jpg").
-                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                
             }
         }
     }
