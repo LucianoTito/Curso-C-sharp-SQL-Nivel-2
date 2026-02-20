@@ -97,8 +97,16 @@ namespace Arquitectura_en_Capas
         private void frmPokemon_Load(object sender, EventArgs e)
         {
             cargarPokemon();
-        }
 
+            // CARGA MANUAL DE COMBOBOX:
+            // A diferencia de la grilla que usa un DataSource conectado a la base de datos,
+            // aquí estamos metiendo las opciones "a mano" (Hardcodeadas) porque son pocas y fijas.
+            cboCampo.Items.Add("Número");
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Descripción");
+            cboCampo.Items.Add("Tipo");
+            cboCampo.Items.Add("Debilidad");
+        }
 
 
         // ---------------------------------------------------------
@@ -227,8 +235,59 @@ namespace Arquitectura_en_Capas
         // ---------------------------------------------------------
         // BOTÓN FILTRAR
         // ---------------------------------------------------------
+        // 1. PRIMERO AGREGAMOS AL GUARDIA DE SEGURIDAD (Cópialo justo arriba de tu botón filtrar)
+        private bool validarFiltro()
+        {
+            // Validamos que haya seleccionado un Campo
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
+                return true; // Retorna true indicando que HUBO un error
+            }
+
+            // Validamos que haya seleccionado un Criterio
+            if (cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                return true;
+            }
+
+            // Validamos que si eligió "Número", la nueva caja de texto no esté vacía
+            if (cboCampo.SelectedItem.ToString() == "Número")
+            {
+                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                {
+                    MessageBox.Show("Debes cargar un número en el filtro avanzado.");
+                    return true;
+                }
+            }
+
+            return false; // Retorna false si todo está perfecto y podemos buscar
+        }
+
+        // 2. BOTÓN FILTRAR
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
+            PokemonNegocio negocio = new PokemonNegocio();
+            try
+            {
+                // Llamamos al guardia. Si devuelve true, cortamos la ejecución para que no explote SQL
+                if (validarFiltro())
+                    return;
+
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+
+                // ¡AQUÍ ESTÁ LA CORRECCIÓN! Usamos la caja avanzada
+                string filtro = txtFiltroAvanzado.Text;
+
+                // Enviamos todo a la base de datos
+                dgvPokemons.DataSource = negocio.Filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -288,6 +347,62 @@ namespace Arquitectura_en_Capas
             ajustarFilas();
             ocultarColumnas();
 
+        }
+
+        // Este evento se dispara AUTOMÁTICAMENTE cada vez que el usuario hace clic 
+        // en el primer ComboBox (cboCampo) y elige una opción diferente.
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var opcion = cboCampo.SelectedItem as string;
+            if (string.IsNullOrEmpty(opcion))
+            {
+                cboCriterio.Items.Clear();
+                return;
+            }
+
+            cboCriterio.Items.Clear();
+
+            if (opcion == "Número")
+            {
+                cboCriterio.Items.Add("Mayor a...");
+                cboCriterio.Items.Add("Menor a...");
+                cboCriterio.Items.Add("Igual a...");
+            }
+            // 3. LÓGICA DE TEXTO:
+            // Usamos el operador lógico OR (||) porque el criterio de búsqueda es el mismo 
+            // sin importar si busca por Nombre o por Descripción.
+            else if (opcion == "Nombre" || opcion == "Descripción")
+            {
+                cboCriterio.Items.Clear(); // Vaciamos por seguridad
+                cboCriterio.Items.Add("Contiene...");
+                cboCriterio.Items.Add("Comienza con...");
+                cboCriterio.Items.Add("Termina con...");
+            }
+            // 4. LÓGICA DE LISTAS CERRADAS:
+            // Tipo y Debilidad también son textos, pero no tiene sentido buscar si un tipo "comienza con...".
+            // Lo ideal es buscar coincidencias exactas ("Igual a...").
+            else if (opcion == "Tipo" || opcion == "Debilidad")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Igual a...");
+            }
+        }
+
+        private void btnReestablecer_Click(object sender, EventArgs e)
+        {
+            // 1. Limpiamos las cajas de texto (Filtro rápido y avanzado)
+            txtFiltro.Text = "";
+            txtFiltroAvanzado.Text = "";
+
+            // 2. Reseteamos los ComboBoxes dejándolos sin selección
+            // El índice -1 significa "nada seleccionado"
+            cboCampo.SelectedIndex = -1;
+
+            // Como el Criterio depende del Campo, simplemente lo vaciamos
+            cboCriterio.Items.Clear();
+
+            // 3. Volvemos a cargar la grilla original desde la base de datos
+            cargarPokemon();
         }
     }
 }

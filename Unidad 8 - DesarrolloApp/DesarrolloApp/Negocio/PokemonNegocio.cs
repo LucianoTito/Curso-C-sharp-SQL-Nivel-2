@@ -4,8 +4,10 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 
@@ -206,6 +208,106 @@ namespace Negocio
             catch (Exception)
             {
                 throw;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public List<Pokemon> Filtrar(string campo, string criterio, string filtro)
+        {
+            List<Pokemon> lista = new List<Pokemon>();
+            Acceso_a_datos datos = new Acceso_a_datos();
+            try
+            {
+                // La base de la consulta (Nota el espacio al final)
+                string consulta = "SELECT P.Numero, P.Nombre, P.Descripcion, P.UrlImagen, E.Descripcion AS Tipo, D.Descripcion AS Debilidad, P.IdTipo, P.IdDebilidad, P.Id FROM dbo.ELEMENTOS E, POKEMONS P, ELEMENTOS D WHERE E.Id = P.IdTipo And D.Id = P.IdDebilidad And P.Activo = 1";
+
+                switch (campo)
+                {
+                    case "Número":
+                        switch (criterio)
+                        {
+                            case "Mayor a...":
+                                consulta += " AND P.Numero > " + filtro;
+                                break;
+                            case "Menor a...":
+                                consulta += " AND P.Numero < " + filtro;
+                                break;
+                            case "Igual a...":
+                                consulta += " AND P.Numero = " + filtro;
+                                break;
+                        }
+                        break;
+
+                    case "Nombre":
+                        switch (criterio)
+                        {
+                            case "Comienza con...":
+                                consulta += " AND P.Nombre LIKE '" + filtro + "%'";
+                                break;
+                            case "Termina con...":
+                                consulta += " AND P.Nombre LIKE '%" + filtro + "'";
+                                break;
+                            case "Contiene...":
+                                consulta += " AND P.Nombre LIKE '%" + filtro + "%'";
+                                break;
+                        }
+                        break; 
+
+                    case "Tipo":
+                        switch (criterio)
+                        {
+                            case "Igual a...":
+                                // Usamos E.Descripcion porque 'E' es el alias de la tabla Elementos para el Tipo
+                                consulta += " AND E.Descripcion = '" + filtro + "'";
+                                break;
+                        }
+                        break;
+
+                    case "Debilidad":
+                        switch (criterio)
+                        {
+                            case "Igual a...":
+                                // Usamos D.Descripcion porque 'D' es el alias para la Debilidad
+                                consulta += " AND D.Descripcion = '" + filtro + "'";
+                                break;
+                        }
+                        break;
+                }
+                datos.SetearConsulta(consulta);
+                datos.EjecutarLectura();
+
+                // Usamos la propiedad pública Lector de tu clase Acceso_a_datos
+                while (datos.Lector.Read())
+                {
+                    Pokemon aux = new Pokemon();
+
+                    // Mapeo de datos (Fíjate que todos ahora dicen datos.Lector)
+                    if (!datos.Lector.IsDBNull(0)) aux.Numero = datos.Lector.GetInt32(0);
+                    if (!datos.Lector.IsDBNull(1)) aux.Nombre = datos.Lector.GetString(1);
+                    if (!datos.Lector.IsDBNull(2)) aux.Descripcion = datos.Lector.GetString(2);
+                    if (!datos.Lector.IsDBNull(3)) aux.UrlImagen = datos.Lector.GetString(3);
+                    if (!datos.Lector.IsDBNull(4)) aux.Tipo.Descripcion = (string)datos.Lector.GetString(4);
+                    if (!datos.Lector.IsDBNull(5)) aux.Debilidad.Descripcion = (string)datos.Lector.GetString(5);
+
+                    // Ids agregados
+                    if (!datos.Lector.IsDBNull(6)) aux.Tipo.Id = datos.Lector.GetInt32(6);
+                    if (!datos.Lector.IsDBNull(7)) aux.Debilidad.Id = datos.Lector.GetInt32(7);
+                    if (!datos.Lector.IsDBNull(8)) aux.Id = datos.Lector.GetInt32(8);
+
+                    lista.Add(aux); // ¡Cuidado aquí! En este método tu lista se llama 'lista', no 'listaPokemons'
+                }
+
+         
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {
