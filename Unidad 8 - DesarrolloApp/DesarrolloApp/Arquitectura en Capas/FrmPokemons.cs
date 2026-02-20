@@ -167,14 +167,33 @@ namespace Arquitectura_en_Capas
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //Esta linea lo que hace es obtener el objeto Pokemon asociado a la fila seleccionada en el DataGridView, utilizando la propiedad DataBoundItem que devuelve el objeto vinculado a esa fila. Luego, se crea una instancia del formulario frmAltaPokemon para modificar los datos del Pokemon seleccionado y se muestra como un diálogo modal. Finalmente, se recarga la lista de Pokemons para reflejar cualquier cambio realizado.
-            Pokemon seleccionado;
-            seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem; // Usar DataBoundItem para obtener el objeto Pokemon asociado a la fila seleccionada
+            // 1. EL ESCUDO PROTECTOR (Validación)
+            // Revisamos si la grilla está vacía o si no hay ninguna fila seleccionada
+            if (dgvPokemons.CurrentRow == null)
+            {
+                MessageBox.Show("Por favor, seleccione un Pokémon de la grilla para modificar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Cortamos la ejecución aquí mismo. El programa no avanza a la siguiente línea.
+            }
 
-            frmAltaPokemon modificarPokemon = new frmAltaPokemon(seleccionado); //LINEA QUE NO ENTIENDO
-            modificarPokemon.ShowDialog();
-            cargarPokemon();
-            ;
+            // 2. LA EJECUCIÓN SEGURA
+            try
+            {
+                Pokemon seleccionado;
+                // Como ya pasamos el escudo, es 100% seguro leer el DataBoundItem
+                seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+
+                // Abrimos la ventana pasándole el Pokémon que atrapamos
+                frmAltaPokemon modificarPokemon = new frmAltaPokemon(seleccionado);
+                modificarPokemon.ShowDialog();
+
+                // Recargamos la grilla para ver los cambios
+                cargarPokemon();
+            }
+            catch (Exception ex)
+            {
+                // Si pasa algo rarísimo (ej. se corta la base de datos justo al intentar abrir), lo atrapamos
+                MessageBox.Show("Ocurrió un error al intentar abrir la ventana de modificación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
@@ -235,34 +254,60 @@ namespace Arquitectura_en_Capas
         // ---------------------------------------------------------
         // BOTÓN FILTRAR
         // ---------------------------------------------------------
-        // 1. PRIMERO AGREGAMOS AL GUARDIA DE SEGURIDAD (Cópialo justo arriba de tu botón filtrar)
+        // 1. PRIMERO AGREGAMOS AL GUARDIA DE SEGURIDAD 
+        // 1. PRIMERO AGREGAMOS AL GUARDIA DE SEGURIDAD
         private bool validarFiltro()
         {
             // Validamos que haya seleccionado un Campo
             if (cboCampo.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
-                return true; // Retorna true indicando que HUBO un error
+                MessageBox.Show("Por favor, seleccione el campo para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
             }
 
             // Validamos que haya seleccionado un Criterio
             if (cboCriterio.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
 
-            // Validamos que si eligió "Número", la nueva caja de texto no esté vacía
+            // Validamos que la caja de texto NO esté vacía para CUALQUIER campo
+            if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+            {
+                MessageBox.Show("Debes ingresar un valor en el filtro avanzado para buscar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            // Si eligió "Número", validamos que el texto contenga SOLO números
             if (cboCampo.SelectedItem.ToString() == "Número")
             {
-                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+                if (!soloNumeros(txtFiltroAvanzado.Text))
                 {
-                    MessageBox.Show("Debes cargar un número en el filtro avanzado.");
+                    MessageBox.Show("Para filtrar por número, debes ingresar únicamente valores numéricos.", "Error de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return true;
                 }
             }
 
             return false; // Retorna false si todo está perfecto y podemos buscar
+        }
+
+        // ---------------------------------------------------------
+        // FUNCIÓN AUXILIAR PARA VALIDAR NÚMEROS
+        // ---------------------------------------------------------
+        private bool soloNumeros(string cadena)
+        {
+            // Recorremos cada letra (caracter) de la palabra que ingresó el usuario
+            foreach (char caracter in cadena)
+            {
+                // Si el caracter NO es un número, devolvemos false inmediatamente
+                if (!char.IsNumber(caracter))
+                {
+                    return false;
+                }
+            }
+            // Si recorrió toda la palabra y no encontró letras, devuelve true
+            return true;
         }
 
         // 2. BOTÓN FILTRAR

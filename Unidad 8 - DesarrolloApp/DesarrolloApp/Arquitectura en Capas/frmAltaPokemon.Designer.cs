@@ -135,7 +135,6 @@
             // 
             // cbxTipo
             // 
-            cbxTipo.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTipo.FormattingEnabled = true;
             cbxTipo.Location = new Point(136, 190);
             cbxTipo.Name = "cbxTipo";
@@ -144,7 +143,6 @@
             // 
             // cbxDebilidad
             // 
-            cbxDebilidad.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDebilidad.FormattingEnabled = true;
             cbxDebilidad.Location = new Point(136, 237);
             cbxDebilidad.Name = "cbxDebilidad";
