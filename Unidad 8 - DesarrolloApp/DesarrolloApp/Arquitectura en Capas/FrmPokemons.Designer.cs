@@ -123,6 +123,7 @@
             txtFiltro.Name = "txtFiltro";
             txtFiltro.Size = new Size(247, 34);
             txtFiltro.TabIndex = 7;
+            txtFiltro.TextChanged += txtFiltro_TextChanged;
             // 
             // btnFiltrar
             // 

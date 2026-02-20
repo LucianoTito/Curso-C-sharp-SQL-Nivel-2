@@ -99,60 +99,7 @@ namespace Arquitectura_en_Capas
             cargarPokemon();
         }
 
-        // ---------------------------------------------------------
-        // BOTÓN FILTRAR
-        // ---------------------------------------------------------
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            // 1. LA CAJA RECEPTORA:
-            // Creamos una lista temporal que solo va a existir mientras dure este clic.
-            // Aquí guardaremos los Pokémones que pasen la prueba del filtro.
-            List<Pokemon> listaFiltrada;
 
-            // 2. CAPTURAMOS EL TEXTO:
-            // Guardamos lo que el usuario escribió en la caja de texto en una variable.
-            string filtro = txtFiltro.Text;
-
-            // 3. LA DECISIÓN: ¿Hay texto o está vacío?
-            if (filtro == "")
-            {
-                // Si el usuario borró todo y le dio a filtrar (o no escribió nada),
-                // le decimos a nuestra lista filtrada que sea igual a la lista original completa.
-                // Es nuestra forma de "reiniciar" la grilla.
-                listaFiltrada = listaPokemons;
-            }
-            else
-            {
-                // 4. EL MOTOR DE BÚSQUEDA (La Magia):
-                // Usamos FindAll para decirle a la lista: "Tráeme a TODOS los que cumplan esta condición".
-                listaFiltrada = listaPokemons.FindAll(e =>
-                    // Condición A: Compara el Nombre.
-                    // Pasa el nombre original a minúsculas (.ToLower()) y se fija si CONTIENE (.Contains) 
-                    // el texto del filtro también pasado a minúsculas. Así "Pikachu" y "pika" coinciden.
-                    e.Nombre.ToLower().Contains(filtro.ToLower())
-
-                    || // Este operador significa "O" (Con que se cumpla la Condición A o la B, es válido).
-
-                    // Condición B: Compara la Descripción del Tipo.
-                    // Hace exactamente lo mismo, pero buscando si el filtro coincide con "Fuego", "Agua", etc.
-                    e.Tipo.Descripcion.ToLower().Contains(filtro.ToLower())
-                );
-            }
-
-            // 5. EL RESETEO FORZADO DE LA GRILLA:
-            // Le quitamos la lista anterior dejándola en null para que la grilla "olvide" lo que tenía.
-            dgvPokemons.DataSource = null;
-
-            // 6. LA RECARGA VISUAL:
-            // Le enchufamos la nueva lista (ya sea la completa o la filtrada).
-            dgvPokemons.DataSource = listaFiltrada;
-
-            // 7. RESTAURAR FORMATO:
-            // Como al poner DataSource en null la grilla se "desarmó", 
-            // volvemos a llamar a nuestros métodos de diseño para ocultar columnas y acomodar los textos.
-            ajustarFilas();
-            ocultarColumnas();
-        }
 
         // ---------------------------------------------------------
         // EVENTO SELECTION 
@@ -229,11 +176,11 @@ namespace Arquitectura_en_Capas
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
-          eliminar(logico: true);
-            
+            eliminar(logico: true);
+
         }
 
-        private void eliminar (bool logico = false)
+        private void eliminar(bool logico = false)
         {
             PokemonNegocio negocio = new PokemonNegocio();
             Pokemon seleccionado;
@@ -256,7 +203,7 @@ namespace Arquitectura_en_Capas
                     // Si el usuario presiona "Sí", entonces eliminamos
                     if (respuesta == DialogResult.Yes)
                     {
-                        if(logico)
+                        if (logico)
                         {
                             negocio.EliminarLogico(seleccionado.Id);
                         }
@@ -275,6 +222,72 @@ namespace Arquitectura_en_Capas
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        // ---------------------------------------------------------
+        // BOTÓN FILTRAR
+        // ---------------------------------------------------------
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+        }
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+
+            // 1. LA CAJA RECEPTORA:
+            // Creamos una lista temporal que solo va a existir mientras dure este clic.
+            // Aquí guardaremos los Pokémones que pasen la prueba del filtro.
+            List<Pokemon> listaFiltrada;
+
+            // 2. CAPTURAMOS EL TEXTO:
+            // Guardamos lo que el usuario escribió en la caja de texto en una variable.
+            string filtro = txtFiltro.Text;
+
+            // 3. LA DECISIÓN: ¿Hay texto o está vacío?
+            if (filtro == "")
+            {
+                // Si el usuario borró todo y le dio a filtrar (o no escribió nada),
+                // le decimos a nuestra lista filtrada que sea igual a la lista original completa.
+                // Es nuestra forma de "reiniciar" la grilla.
+                listaFiltrada = listaPokemons;
+            }
+            else
+            {
+                // 4. EL MOTOR DE BÚSQUEDA (La Magia):
+                // Usamos FindAll para decirle a la lista: "Tráeme a TODOS los que cumplan esta condición".
+                listaFiltrada = listaPokemons.FindAll(e =>
+                    // Condición A: Compara el Nombre.
+                    // Pasa el nombre original a minúsculas (.ToLower()) y se fija si CONTIENE (.Contains) 
+                    // el texto del filtro también pasado a minúsculas. Así "Pikachu" y "pika" coinciden.
+                    e.Nombre.ToLower().Contains(filtro.ToLower())
+
+                    || // Este operador significa "O" (Con que se cumpla la Condición A o la B, es válido).
+
+                    // Condición B: Compara la Descripción del Tipo.
+                    // Hace exactamente lo mismo, pero buscando si el filtro coincide con "Fuego", "Agua", etc.
+                    e.Tipo.Descripcion.ToLower().Contains(filtro.ToLower())
+                );
+            }
+
+            // 5. EL RESETEO FORZADO DE LA GRILLA:
+            // Le quitamos la lista anterior dejándola en null para que la grilla "olvide" lo que tenía.
+            dgvPokemons.DataSource = null;
+
+            // 6. LA RECARGA VISUAL:
+            // Le enchufamos la nueva lista (ya sea la completa o la filtrada).
+            dgvPokemons.DataSource = listaFiltrada;
+
+            // 7. RESTAURAR FORMATO:
+            // Como al poner DataSource en null la grilla se "desarmó", 
+            // volvemos a llamar a nuestros métodos de diseño para ocultar columnas y acomodar los textos.
+            ajustarFilas();
+            ocultarColumnas();
+
         }
     }
 }
