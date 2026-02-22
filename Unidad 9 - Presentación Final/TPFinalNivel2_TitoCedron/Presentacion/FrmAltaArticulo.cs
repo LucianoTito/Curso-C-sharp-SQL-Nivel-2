@@ -31,8 +31,8 @@ namespace Presentacion
 
         private void FrmAltaArticulo_Load(object sender, EventArgs e)
         {
-           MarcaNegocio marcaNegocio = new MarcaNegocio();
-           CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
             try
             {
@@ -83,6 +83,59 @@ namespace Presentacion
         {
             Close();
 
+        }
+
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            try
+            {
+                
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precioValido) || precioValido < 0)
+                {
+                    MessageBox.Show("Ingrese un precio numérico válido.", "Formato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
+                    return;
+                }
+
+             
+                if (articulo == null)
+                {
+                    articulo = new Articulo();
+                }
+
+               
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.ImagenUrl = txtUrlImagen.Text;
+                articulo.Precio = precioValido; 
+
+                // Asigno el Id de Marca y Categoria seleccionados en los comboBox
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+
+                // Decido si insertar o actualizar en la BD
+                if (articulo.Id != 0)
+                {
+                    negocio.ModificarArticulo(articulo);
+                    MessageBox.Show("Artículo modificado exitosamente.", "Modificación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    negocio.AgregarArticulo(articulo);
+                    MessageBox.Show("Artículo agregado exitosamente.", "Alta Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

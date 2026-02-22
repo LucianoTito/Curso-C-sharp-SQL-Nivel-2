@@ -10,21 +10,21 @@ namespace Negocio
 {
     public class ArticuloNegocio
     {
-      
+
         public List<Articulo> Listar()
-          {
-                List<Articulo> lista = new List<Articulo>();
-                AccesoDatos datos = new AccesoDatos();
-    
-                try
-                {
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
                 string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id";
                 datos.SetearConsulta(consulta);
                 datos.EjecutarLectura();
 
                 //Mapeo de la tabla sql a la clase Articulo
                 while (datos.Lector.Read())
-                 {
+                {
                     Articulo aux = new Articulo();
 
                     if (!datos.Lector.IsDBNull(0)) aux.Id = datos.Lector.GetInt32(0);
@@ -33,7 +33,7 @@ namespace Negocio
                     if (!datos.Lector.IsDBNull(3)) aux.Descripcion = datos.Lector.GetString(3);
 
                     //Instancio la marca
-                    aux.Marca  = new Marca();
+                    aux.Marca = new Marca();
                     if (!datos.Lector.IsDBNull(4)) aux.Marca.Id = datos.Lector.GetInt32(4);
                     if (!datos.Lector.IsDBNull(5)) aux.Marca.Descripcion = datos.Lector.GetString(5);
 
@@ -43,25 +43,26 @@ namespace Negocio
                     if (!datos.Lector.IsDBNull(7)) aux.Categoria.Descripcion = datos.Lector.GetString(7);
 
                     if (!datos.Lector.IsDBNull(8)) aux.ImagenUrl = datos.Lector.GetString(8);
+                    if (!datos.Lector.IsDBNull(9)) aux.Precio = datos.Lector.GetDecimal(9);
 
                     lista.Add(aux);
 
                 }
 
                 return lista;
-                }
-                catch (Exception ex)
-                {
-    
-                 throw ex;
-                }
-                finally
-                {
-                 datos.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
             }
         }
 
-        public void Eliminar (int id)
+        public void Eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -82,5 +83,56 @@ namespace Negocio
             }
         }
 
+        public void AgregarArticulo(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @ImagenUrl, @Precio)");
+                datos.SetearParametro("@Codigo", nuevo.Codigo);
+                datos.SetearParametro("@Nombre", nuevo.Nombre);
+                datos.SetearParametro("@Descripcion", nuevo.Descripcion);
+                datos.SetearParametro("@IdMarca", nuevo.Marca.Id);
+                datos.SetearParametro("@IdCategoria", nuevo.Categoria.Id);
+                datos.SetearParametro("@ImagenUrl", nuevo.ImagenUrl);
+                datos.SetearParametro("@Precio", nuevo.Precio);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+
+        }
+
+        public void ModificarArticulo(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("UPDATE ARTICULOS SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdMarca = @IdMarca, IdCategoria = @IdCategoria, ImagenUrl = @ImagenUrl, Precio = @Precio WHERE Id = @Id");
+                datos.SetearParametro("@Codigo", articulo.Codigo);
+                datos.SetearParametro("@Nombre", articulo.Nombre);
+                datos.SetearParametro("@Descripcion", articulo.Descripcion);
+                datos.SetearParametro("@IdMarca", articulo.Marca.Id);
+                datos.SetearParametro("@IdCategoria", articulo.Categoria.Id);
+                datos.SetearParametro("@ImagenUrl", articulo.ImagenUrl);
+                datos.SetearParametro("@Precio", articulo.Precio);
+                datos.SetearParametro("@Id", articulo.Id);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

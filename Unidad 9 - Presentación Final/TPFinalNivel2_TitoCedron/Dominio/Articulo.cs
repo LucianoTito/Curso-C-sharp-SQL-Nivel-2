@@ -26,7 +26,8 @@ namespace Dominio
 
         public string ImagenUrl { get; set; } = string.Empty;
 
-        //Precio del articulo
+      
+        [DisplayName ("Precio ($)")]
         public decimal Precio { get; set; }
     }
 }

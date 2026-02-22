@@ -41,6 +41,13 @@ namespace Presentacion
                 dgvArticulos.DataSource = listaArticulos;
 
                 ocultarColumnas();
+     
+                dgvArticulos.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+                 
+                dgvArticulos.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
 
                 if (listaArticulos != null && listaArticulos.Count > 0)
                 {
@@ -130,6 +137,7 @@ namespace Presentacion
         {
             FrmAltaArticulo alta = new FrmAltaArticulo();
             alta.ShowDialog();
+            CargarArticulos();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
