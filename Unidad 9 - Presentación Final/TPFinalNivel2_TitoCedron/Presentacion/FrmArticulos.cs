@@ -67,7 +67,7 @@ namespace Presentacion
 
         private void cargarImagen(string imagen)
         {
-            const string imagenDefault = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
+             string imagenDefault = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
             try
             {
                 if (string.IsNullOrEmpty(imagen))
@@ -84,7 +84,15 @@ namespace Presentacion
             catch (Exception)
             {
 
-                pbxArticulo.Load(imagenDefault);
+                try
+                {
+                    pbxArticulo.Load(imagenDefault);
+                }
+                catch (Exception)
+                {
+
+                    pbxArticulo.Image = null;
+                }
             }
         }
 
