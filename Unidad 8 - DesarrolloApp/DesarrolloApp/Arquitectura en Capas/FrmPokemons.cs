@@ -40,7 +40,7 @@ namespace Arquitectura_en_Capas
                 // Enlazamos la grilla
                 dgvPokemons.DataSource = listaPokemons;
 
-                ajustarFilas();
+                AjustarFilas();
                 ocultarColumnas();
 
                 // Cargar imagen del primer pokemon por defecto
@@ -389,7 +389,7 @@ namespace Arquitectura_en_Capas
             // 7. RESTAURAR FORMATO:
             // Como al poner DataSource en null la grilla se "desarmó", 
             // volvemos a llamar a nuestros métodos de diseño para ocultar columnas y acomodar los textos.
-            ajustarFilas();
+            AjustarFilas();
             ocultarColumnas();
 
         }

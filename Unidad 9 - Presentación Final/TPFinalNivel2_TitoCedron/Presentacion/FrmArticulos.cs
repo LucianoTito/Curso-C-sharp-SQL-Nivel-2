@@ -67,7 +67,7 @@ namespace Presentacion
 
         private void cargarImagen(string imagen)
         {
-             string imagenDefault = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png";
+            const string imagenDefault = "https://cdn-icons-png.flaticon.com/512/11542/11542598.png";
             try
             {
                 if (string.IsNullOrEmpty(imagen))
@@ -84,15 +84,8 @@ namespace Presentacion
             catch (Exception)
             {
 
-                try
-                {
+                if (pbxArticulo != null)
                     pbxArticulo.Load(imagenDefault);
-                }
-                catch (Exception)
-                {
-
-                    pbxArticulo.Image = null;
-                }
             }
         }
 
