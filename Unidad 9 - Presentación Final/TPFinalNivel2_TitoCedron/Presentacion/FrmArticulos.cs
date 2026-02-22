@@ -98,5 +98,32 @@ namespace Presentacion
             }
 
         }
+
+        private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+
+            string filtro = txtFiltroRapido.Text;
+
+            if(filtro == "")
+            {
+                listaFiltrada = listaArticulos;
+            }
+            else
+            {
+                listaFiltrada = listaArticulos.FindAll(    
+                x =>
+                x.Nombre.ToLower().Contains(filtro.ToLower()) ||
+                x.Descripcion.ToLower().Contains(filtro.ToLower()) ||
+                x.Marca.Descripcion.ToLower().Contains(filtro.ToLower()) ||
+                x.Categoria.Descripcion.ToLower().Contains(filtro.ToLower())
+                   );
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+
+            ocultarColumnas();
+        }
     }
 }

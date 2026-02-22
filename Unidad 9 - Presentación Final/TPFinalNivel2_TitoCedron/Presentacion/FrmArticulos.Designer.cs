@@ -34,7 +34,7 @@
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.lblFiltroRapido = new System.Windows.Forms.Label();
-            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.txtFiltroRapido = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -73,7 +73,7 @@
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -94,7 +94,7 @@
             // 
             // pbxArticulo
             // 
-            this.pbxArticulo.Location = new System.Drawing.Point(1275, 144);
+            this.pbxArticulo.Location = new System.Drawing.Point(1235, 144);
             this.pbxArticulo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbxArticulo.Name = "pbxArticulo";
             this.pbxArticulo.Size = new System.Drawing.Size(528, 485);
@@ -114,15 +114,16 @@
             this.lblFiltroRapido.TabIndex = 2;
             this.lblFiltroRapido.Text = "Filtro Rápido: ";
             // 
-            // txtFiltro
+            // txtFiltroRapido
             // 
-            this.txtFiltro.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.txtFiltro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFiltro.Location = new System.Drawing.Point(339, 86);
-            this.txtFiltro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(445, 30);
-            this.txtFiltro.TabIndex = 0;
+            this.txtFiltroRapido.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtFiltroRapido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFiltroRapido.Location = new System.Drawing.Point(339, 86);
+            this.txtFiltroRapido.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtFiltroRapido.Name = "txtFiltroRapido";
+            this.txtFiltroRapido.Size = new System.Drawing.Size(445, 30);
+            this.txtFiltroRapido.TabIndex = 0;
+            this.txtFiltroRapido.TextChanged += new System.EventHandler(this.txtFiltroRapido_TextChanged);
             // 
             // button1
             // 
@@ -271,8 +272,9 @@
             // 
             this.txtFiltroAvanzado.Location = new System.Drawing.Point(694, 785);
             this.txtFiltroAvanzado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtFiltroAvanzado.MaximumSize = new System.Drawing.Size(500, 100);
             this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
-            this.txtFiltroAvanzado.Size = new System.Drawing.Size(262, 30);
+            this.txtFiltroAvanzado.Size = new System.Drawing.Size(228, 30);
             this.txtFiltroAvanzado.TabIndex = 7;
             // 
             // FrmArticulos
@@ -280,7 +282,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.ClientSize = new System.Drawing.Size(1851, 852);
+            this.ClientSize = new System.Drawing.Size(1822, 852);
             this.Controls.Add(this.txtFiltroAvanzado);
             this.Controls.Add(this.cboCriterio);
             this.Controls.Add(this.cboCampo);
@@ -295,7 +297,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.txtFiltroRapido);
             this.Controls.Add(this.lblFiltroRapido);
             this.Controls.Add(this.pbxArticulo);
             this.Controls.Add(this.dgvArticulos);
@@ -317,7 +319,7 @@
         private System.Windows.Forms.DataGridView dgvArticulos;
         private System.Windows.Forms.PictureBox pbxArticulo;
         private System.Windows.Forms.Label lblFiltroRapido;
-        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.TextBox txtFiltroRapido;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAgregar;
