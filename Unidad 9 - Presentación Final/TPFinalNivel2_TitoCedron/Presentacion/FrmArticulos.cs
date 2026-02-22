@@ -158,5 +158,40 @@ namespace Presentacion
             }
 
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+
+            try
+            {
+                if (dgvArticulos.CurrentRow == null)
+                {
+                    MessageBox.Show("Por favor, seleccione un artículo de la grilla para eliminar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //Atrapamos el artículo seleccionado
+                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+                //Confirmamos la eliminación
+                DialogResult respuesta = MessageBox.Show($"¿Está seguro que desea eliminar el artículo '{seleccionado.Nombre}'?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (respuesta == DialogResult.Yes)
+                {
+                    negocio.Eliminar(seleccionado.Id);
+                    CargarArticulos();
+                    MessageBox.Show("Artículo eliminado correctamente.", "Eliminación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al intentar eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
     }
 }
