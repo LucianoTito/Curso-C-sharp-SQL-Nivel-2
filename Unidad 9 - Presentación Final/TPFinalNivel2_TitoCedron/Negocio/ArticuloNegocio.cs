@@ -41,7 +41,7 @@ namespace Negocio
                     if (!datos.Lector.IsDBNull(6)) aux.Categoria.Id = datos.Lector.GetInt32(6);
                     if (!datos.Lector.IsDBNull(7)) aux.Categoria.Descripcion = datos.Lector.GetString(7);
 
-                    if (!datos.Lector.IsDBNull(8)) aux.UrlImagen = datos.Lector.GetString(8);
+                    if (!datos.Lector.IsDBNull(8)) aux.ImagenUrl = datos.Lector.GetString(8);
 
                     lista.Add(aux);
 

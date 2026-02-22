@@ -77,7 +77,7 @@ namespace Arquitectura_en_Capas
 
         //MÉTODO PARA AJUSTAR EL TAMAÑO DE LAS FILAS SEGÚN EL CONTENIDO DE LA COLUMNA DESCRIPCIÓN
 
-        void ajustarFilas()
+        void AjustarFilas()
         {
 
             // Que la columna Descripcion ocupe todo el espacio disponible
