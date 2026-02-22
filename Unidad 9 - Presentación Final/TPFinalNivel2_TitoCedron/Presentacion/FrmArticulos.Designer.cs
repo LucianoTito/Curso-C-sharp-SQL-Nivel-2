@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.lblFiltroRapido = new System.Windows.Forms.Label();
@@ -55,30 +55,30 @@
             // 
             // dgvArticulos
             // 
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.Lavender;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.Lavender;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvArticulos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvArticulos.BackgroundColor = System.Drawing.Color.CornflowerBlue;
             this.dgvArticulos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvArticulos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvArticulos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvArticulos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle27;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvArticulos.EnableHeadersVisualStyles = false;
             this.dgvArticulos.GridColor = System.Drawing.SystemColors.ActiveCaption;
@@ -156,6 +156,7 @@
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnEliminar
             // 
@@ -180,6 +181,7 @@
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnReestablecer
             // 

@@ -125,5 +125,38 @@ namespace Presentacion
 
             ocultarColumnas();
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            FrmAltaArticulo alta = new FrmAltaArticulo();
+            alta.ShowDialog();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo de la grilla para modificar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+                
+            }
+            try
+            {
+                Articulo seleccionado;
+                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                
+                FrmAltaArticulo modificar = new FrmAltaArticulo(seleccionado);
+                modificar.ShowDialog();
+
+                CargarArticulos();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Ocurrió un error al cargar el formulario de modificación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
     }
 }
