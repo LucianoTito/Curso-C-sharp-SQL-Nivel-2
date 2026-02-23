@@ -25,28 +25,7 @@ namespace Negocio
                 //Mapeo de la tabla sql a la clase Articulo
                 while (datos.Lector.Read())
                 {
-                    Articulo aux = new Articulo();
-
-                    if (!datos.Lector.IsDBNull(0)) aux.Id = datos.Lector.GetInt32(0);
-                    if (!datos.Lector.IsDBNull(1)) aux.Codigo = datos.Lector.GetString(1);
-                    if (!datos.Lector.IsDBNull(2)) aux.Nombre = datos.Lector.GetString(2);
-                    if (!datos.Lector.IsDBNull(3)) aux.Descripcion = datos.Lector.GetString(3);
-
-                    //Instancio la marca
-                    aux.Marca = new Marca();
-                    if (!datos.Lector.IsDBNull(4)) aux.Marca.Id = datos.Lector.GetInt32(4);
-                    if (!datos.Lector.IsDBNull(5)) aux.Marca.Descripcion = datos.Lector.GetString(5);
-
-                    //Instancio la categoria
-                    aux.Categoria = new Categoria();
-                    if (!datos.Lector.IsDBNull(6)) aux.Categoria.Id = datos.Lector.GetInt32(6);
-                    if (!datos.Lector.IsDBNull(7)) aux.Categoria.Descripcion = datos.Lector.GetString(7);
-
-                    if (!datos.Lector.IsDBNull(8)) aux.ImagenUrl = datos.Lector.GetString(8);
-                    if (!datos.Lector.IsDBNull(9)) aux.Precio = datos.Lector.GetDecimal(9);
-
-                    lista.Add(aux);
-
+                        lista.Add(MapearArticulo(datos)); //El método MapearArticulo se encarga de crear un nuevo objeto Articulo y asignarle los valores correspondientes a cada propiedad, utilizando los datos obtenidos del lector de la consulta SQL.
                 }
 
                 return lista;
@@ -61,6 +40,103 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+
+        //El método Filtrar permite realizar búsquedas específicas en la base de datos según el campo, criterio y filtro proporcionados. Construye dinámicamente la consulta SQL en función de los parámetros y luego ejecuta la consulta para obtener los resultados filtrados.
+        public List<Articulo> Filtrar(string campo, string criterio, string filtro)
+        {
+            List <Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id AND ";
+
+                if (campo == "Precio")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "A.Precio > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "A.Precio < " + filtro;
+                            break;
+                        case "Igual a":
+                            consulta += "A.Precio = " + filtro;
+                            break;
+                    }
+                }
+                else if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con...":
+                            consulta += "A.Nombre LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con...":
+                            consulta += "A.Nombre LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene...":
+                            consulta += "A.Nombre LIKE '%" + filtro + "%'";
+                            break;
+
+                    }
+                }
+                else if (campo == "Marca")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con...":
+                            consulta += "M.Descripcion LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con...":
+                            consulta += "M.Descripcion LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene...":
+                            consulta += "M.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Descripcion")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con...":
+                            consulta += "A.Descripcion LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con...":
+                            consulta += "A.Descripcion LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene...":
+                            consulta += "A.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+
+                    }
+                }
+
+                //Ejecuto y leo la consulta
+                datos.SetearConsulta(consulta);
+                datos.EjecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    lista.Add(MapearArticulo(datos));
+                }
+
+                return lista;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
 
         public void Eliminar(int id)
         {
@@ -133,6 +209,29 @@ namespace Negocio
             {
                 datos.CerrarConexion();
             }
+        }
+
+        private Articulo MapearArticulo (AccesoDatos datos)
+        {
+            Articulo aux = new Articulo();
+
+            if (!datos.Lector.IsDBNull(0)) aux.Id = datos.Lector.GetInt32(0);
+            if (!datos.Lector.IsDBNull(1)) aux.Codigo = datos.Lector.GetString(1);
+            if (!datos.Lector.IsDBNull(2)) aux.Nombre = datos.Lector.GetString(2);
+            if (!datos.Lector.IsDBNull(3)) aux.Descripcion = datos.Lector.GetString(3);
+
+            aux.Marca = new Marca();
+            if (!datos.Lector.IsDBNull(4)) aux.Marca.Id = datos.Lector.GetInt32(4);
+            if (!datos.Lector.IsDBNull(5)) aux.Marca.Descripcion = datos.Lector.GetString(5);
+
+            aux.Categoria = new Categoria();
+            if (!datos.Lector.IsDBNull(6)) aux.Categoria.Id = datos.Lector.GetInt32(6);
+            if (!datos.Lector.IsDBNull(7)) aux.Categoria.Descripcion = datos.Lector.GetString(7);
+
+            if (!datos.Lector.IsDBNull(8)) aux.ImagenUrl = datos.Lector.GetString(8);
+            if (!datos.Lector.IsDBNull(9)) aux.Precio = datos.Lector.GetDecimal(9);
+
+            return aux;
         }
     }
 }

@@ -28,7 +28,11 @@ namespace Presentacion
         private void FrmArticulos_Load(object sender, EventArgs e)
         {
             CargarArticulos();
-
+            cboCampo.Items.Add("Marca");
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Precio");       
+            cboCampo.Items.Add("Descripción");
+            
         }
 
         private void CargarArticulos()
@@ -200,6 +204,33 @@ namespace Presentacion
                 MessageBox.Show("Error al intentar eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Capturo lo que eligió el usuario en el comboBox
+            string opcion = cboCampo.SelectedItem.ToString();
+
+            //Limpio el segundo comboBox por si tenia algo de una búsuqueda anterior
+            cboCriterio.Items.Clear();
+
+            //Limpio el txtFiltroAvanzado por si tenia algo de una búsqueda anterior
+            txtFiltroAvanzado.Text = "";
+
+            //Dependiendo de lo que elija el usuario en el primer comboBox, cargo el segundo comboBox con las opciones correspondientes
+            if (opcion == "Precio")
+            {
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Igual a");
+            }
+            else //Si eligió nombre o descripcion , ambas son textos
+            {
+                cboCriterio.Items.Add("Comienza con...");
+                cboCriterio.Items.Add("Termina con...");
+                cboCriterio.Items.Add("Contiene...");
+
+            }
         }
     }
 }
