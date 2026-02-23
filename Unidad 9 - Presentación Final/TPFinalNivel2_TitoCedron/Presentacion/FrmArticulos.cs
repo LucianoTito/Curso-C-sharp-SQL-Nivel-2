@@ -32,7 +32,11 @@ namespace Presentacion
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Precio");       
             cboCampo.Items.Add("Descripción");
-            
+
+            dgvArticulos.RowTemplate.Height = 100;
+
+            dgvArticulos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
         }
 
         private void CargarArticulos()
@@ -44,8 +48,8 @@ namespace Presentacion
                 listaArticulos = negocio.Listar();
                 dgvArticulos.DataSource = listaArticulos;
 
-                ocultarColumnas();
-     
+                formatearGrilla();
+
                 dgvArticulos.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
                  
@@ -67,13 +71,17 @@ namespace Presentacion
             }
         }
 
-        private void ocultarColumnas()
+        private void formatearGrilla()
         {
             if (dgvArticulos.Columns["ImagenUrl"] != null)
                 dgvArticulos.Columns["ImagenUrl"].Visible = false;
 
             if (dgvArticulos.Columns["Id"] != null)
                 dgvArticulos.Columns["Id"].Visible = false;
+
+            dgvArticulos.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgvArticulos.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
         }
 
         private void cargarImagen(string imagen)
@@ -232,5 +240,72 @@ namespace Presentacion
 
             }
         }
+
+        private bool ValidarFiltro()
+        {
+            //  Validar Combos
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un campo para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            if (cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un criterio para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            //  Validar que la caja no esté vacía 
+            if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
+            {
+                MessageBox.Show("Ingrese un valor para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+
+            if (cboCampo.SelectedItem.ToString() == "Precio")
+            {
+                //Escudo anti-letras
+                if (!decimal.TryParse(txtFiltroAvanzado.Text, out decimal resultado))
+                {
+                    MessageBox.Show("Ingrese un valor numérico válido para el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
+                }
+
+                if (resultado < 0)
+                {
+                    MessageBox.Show("El precio no puede ser negativo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return true;
+                }
+            }
+
+            // Si llegó hasta aquí, no hay ningún error
+            return false;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            try
+            {
+                // Si devuelve 'true' (hay error).
+                if (ValidarFiltro())
+                {
+                    return;
+                }
+
+                // Si pasamos el if anterior, capturamos datos y filtramos
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+
+                dgvArticulos.DataSource = negocio.Filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar filtrar la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+       
     }
 }
