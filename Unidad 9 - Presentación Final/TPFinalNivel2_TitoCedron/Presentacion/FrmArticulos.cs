@@ -42,36 +42,25 @@ namespace Presentacion
         private void CargarArticulos()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-
             try
             {
                 listaArticulos = negocio.Listar();
                 dgvArticulos.DataSource = listaArticulos;
 
-                formatearGrilla();
-
-                dgvArticulos.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-                 
-                dgvArticulos.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
+                FormatearGrilla(); 
 
                 if (listaArticulos != null && listaArticulos.Count > 0)
                 {
-                    cargarImagen(listaArticulos[0].ImagenUrl);
-
+                    CargarImagen(listaArticulos[0].ImagenUrl);
                 }
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error al cargar el catálogo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void formatearGrilla()
+        private void FormatearGrilla()
         {
             if (dgvArticulos.Columns["ImagenUrl"] != null)
                 dgvArticulos.Columns["ImagenUrl"].Visible = false;
@@ -84,7 +73,7 @@ namespace Presentacion
             dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
         }
 
-        private void cargarImagen(string imagen)
+        private void CargarImagen(string imagen)
         {
             const string imagenDefault = "https://cdn-icons-png.flaticon.com/512/11542/11542598.png";
             try
@@ -113,7 +102,7 @@ namespace Presentacion
             if (dgvArticulos.CurrentRow != null)
             {
                 Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.ImagenUrl);
+                CargarImagen(seleccionado.ImagenUrl);
             }
 
         }
@@ -142,7 +131,7 @@ namespace Presentacion
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
 
-            ocultarColumnas();
+            FormatearGrilla();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -216,6 +205,12 @@ namespace Presentacion
 
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Le digo si no hay nada seleccionado, no intentes leer el texto, simplemente no hagas nada
+            if (cboCampo.SelectedItem == null)
+            {
+                return;
+            }
+
             //Capturo lo que eligió el usuario en el comboBox
             string opcion = cboCampo.SelectedItem.ToString();
 
@@ -264,7 +259,7 @@ namespace Presentacion
 
             if (cboCampo.SelectedItem.ToString() == "Precio")
             {
-                //Escudo anti-letras
+                //Escudo antiletras
                 if (!decimal.TryParse(txtFiltroAvanzado.Text, out decimal resultado))
                 {
                     MessageBox.Show("Ingrese un valor numérico válido para el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -288,7 +283,7 @@ namespace Presentacion
 
             try
             {
-                // Si devuelve 'true' (hay error).
+                // Si devuelve true (hay error).
                 if (ValidarFiltro())
                 {
                     return;
@@ -300,12 +295,28 @@ namespace Presentacion
                 string filtro = txtFiltroAvanzado.Text;
 
                 dgvArticulos.DataSource = negocio.Filtrar(campo, criterio, filtro);
+                FormatearGrilla();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error al intentar filtrar la base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+
+        private void btnReestablecer_Click(object sender, EventArgs e)
+        {
+            //Limpieza de las cajas de texto
+            txtFiltroAvanzado.Text = "";
+            txtFiltroRapido.Text = "";
+
+            //Limpieza de los comboBox
+            cboCampo.SelectedIndex = -1;
+
+            //Limpiar el segundo comboBox
+            cboCriterio.Items.Clear();
+
+            //Cargamos todos los articulos
+            CargarArticulos();
+        }
     }
 }

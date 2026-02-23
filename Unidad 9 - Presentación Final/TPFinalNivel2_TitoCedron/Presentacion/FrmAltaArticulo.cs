@@ -8,13 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Configuration;
 using Negocio;
 using Dominio;
+using Microsoft.IdentityModel.Protocols;
+
+
+
 namespace Presentacion
 {
     public partial class FrmAltaArticulo : Form
     {
         private Articulo articulo = null;
+        private OpenFileDialog archivo = null; 
         public FrmAltaArticulo()
         {
             InitializeComponent();
@@ -110,7 +117,7 @@ namespace Presentacion
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.ImagenUrl = txtUrlImagen.Text;
+                articulo.ImagenUrl = txtUrlImagen.Text ?? string.Empty;
                 articulo.Precio = precioValido; 
 
                 // Asigno el Id de Marca y Categoria seleccionados en los comboBox
@@ -129,12 +136,53 @@ namespace Presentacion
                     MessageBox.Show("Artículo agregado exitosamente.", "Alta Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
+                //GUARDADO FÍSICO DE LA IMAGEN LOCAL
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+
+                {
+                    string rutaDestino = ConfigurationManager.AppSettings["images-folder"];
+
+                    if (!Directory.Exists(rutaDestino))
+                    { 
+                        Directory.CreateDirectory(rutaDestino);
+                    }
+                    
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName, true);
+                }
                 
                 Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrió un error al guardar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocurrió un error al guardar el artículo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAgregarUrl_Click(object sender, EventArgs e)
+        {
+            //Instancio la ventana de explorador de windors
+            archivo = new OpenFileDialog();
+
+            archivo.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            if(archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlImagen.Text = archivo.FileName;
+
+                try
+                {
+                    pbxArticulo.Load(archivo.FileName);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("No se pudo cargar la vista previa de la imagen", "Atención",MessageBoxButtons.OK ,MessageBoxIcon.Warning);
+
+
+                }
+
+
+
             }
         }
     }

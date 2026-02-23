@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAltaArticulo));
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
@@ -184,6 +185,7 @@
             // btnAgregarUrl
             // 
             this.btnAgregarUrl.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAgregarUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarUrl.ForeColor = System.Drawing.Color.Lavender;
             this.btnAgregarUrl.Location = new System.Drawing.Point(376, 402);
             this.btnAgregarUrl.Name = "btnAgregarUrl";
@@ -191,10 +193,12 @@
             this.btnAgregarUrl.TabIndex = 13;
             this.btnAgregarUrl.Text = "+";
             this.btnAgregarUrl.UseVisualStyleBackColor = false;
+            this.btnAgregarUrl.Click += new System.EventHandler(this.btnAgregarUrl_Click);
             // 
             // btnAceptar
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.Lavender;
             this.btnAceptar.Location = new System.Drawing.Point(64, 579);
             this.btnAceptar.Name = "btnAceptar";
@@ -207,6 +211,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.Color.Lavender;
             this.btnCancelar.Location = new System.Drawing.Point(227, 579);
             this.btnCancelar.Name = "btnCancelar";
@@ -273,10 +278,15 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(828, 826);
+            this.MinimumSize = new System.Drawing.Size(828, 826);
             this.Name = "FrmAltaArticulo";
-            this.Opacity = 0.99D;
+            this.Opacity = 0.98D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta Artículo";
             this.Load += new System.EventHandler(this.FrmAltaArticulo_Load);
