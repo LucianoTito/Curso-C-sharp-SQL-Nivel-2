@@ -32,7 +32,6 @@ namespace Presentacion
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Precio");       
             cboCampo.Items.Add("Descripción");
-            cboCampo.Items.Add("Codigo");
 
             dgvArticulos.RowTemplate.Height = 100;
 
@@ -125,7 +124,6 @@ namespace Presentacion
                 x.Nombre.ToLower().Contains(filtro.ToLower()) ||
                 x.Descripcion.ToLower().Contains(filtro.ToLower()) ||
                 x.Marca.Descripcion.ToLower().Contains(filtro.ToLower()) ||
-                x.Codigo.ToLower().Contains(filtro.ToLower()) ||
                 x.Categoria.Descripcion.ToLower().Contains(filtro.ToLower())
                    );
             }
