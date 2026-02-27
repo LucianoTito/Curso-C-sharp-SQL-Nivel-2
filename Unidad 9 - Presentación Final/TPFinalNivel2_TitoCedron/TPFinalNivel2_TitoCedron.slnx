@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path="Readme.md" />
+  </Folder>
   <Project Path="Dominio/Dominio.csproj" Id="4ad64d12-2268-46bf-87ed-2ffc191239a9" />
   <Project Path="Negocio/Negocio.csproj" Id="a4827643-1723-4dac-8593-918fb573d821" />
   <Project Path="Presentacion/Presentacion.csproj" Id="c4ab2346-65df-41db-b592-fb5a2081e65f" />
