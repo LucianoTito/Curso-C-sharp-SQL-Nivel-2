@@ -18,6 +18,7 @@ Un sistema de escritorio robusto desarrollado en **C# (.NET Framework 4.8.1)** p
 - UI Windows Forms con comportamiento modal y estilos consistentes.
 
 ---
+![proyeco_csharp](https://github.com/user-attachments/assets/b15438ae-a925-4dc9-aabf-5860a9729842)
 
 ## 🧭 Requisitos previos
 
