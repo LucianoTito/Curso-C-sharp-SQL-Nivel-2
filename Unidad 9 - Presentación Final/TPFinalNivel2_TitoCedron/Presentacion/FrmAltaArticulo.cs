@@ -99,7 +99,12 @@ namespace Presentacion
 
             try
             {
-                
+                if (string.IsNullOrWhiteSpace(txtCodigo.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtDescripcion.Text) || string.IsNullOrWhiteSpace(txtPrecio.Text))
+                {
+                    MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (!decimal.TryParse(txtPrecio.Text, out decimal precioValido) || precioValido < 0)
                 {
                     MessageBox.Show("Ingrese un precio numérico válido.", "Formato Incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
