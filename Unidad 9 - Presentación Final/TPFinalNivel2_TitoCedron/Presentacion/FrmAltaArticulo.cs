@@ -48,18 +48,14 @@ namespace Presentacion
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
 
-                //Filtro rapido para el comboBox de Marca
-                cboMarca.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cboMarca.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cboMarca.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 //Carga y autocompletado del comboBox de Categoria
                 cboCategoria.DataSource = categoriaNegocio.listar();
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
 
-                //Filtro rapido para el comboBox de Categoria
-                cboCategoria.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                cboCategoria.AutoCompleteSource = AutoCompleteSource.ListItems;
+                cboCategoria.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 //Si no es null carga los datos del articulo a modificar
                 if (articulo != null)
