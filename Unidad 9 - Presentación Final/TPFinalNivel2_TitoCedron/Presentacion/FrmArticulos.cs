@@ -69,9 +69,18 @@ namespace Presentacion
             if (dgvArticulos.Columns["Id"] != null)
                 dgvArticulos.Columns["Id"].Visible = false;
 
-            dgvArticulos.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dgvArticulos.Columns["Descripcion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
+            if (dgvArticulos.Columns["Descripcion"] != null)
+                dgvArticulos.Columns["Descripcion"].Visible = false;
+
+            if (dgvArticulos.Columns["Codigo"] != null)
+                dgvArticulos.Columns["Codigo"].Visible = false;
+
+            if (dgvArticulos.Columns["Nombre"] != null)
+                dgvArticulos.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            if (dgvArticulos.Columns["Precio"] != null)
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2"; // Formato de moneda con 2 decimales
+
         }
 
         private void CargarImagen(string imagen)

@@ -97,7 +97,7 @@ namespace Negocio
                             break;
                     }
                 }
-                else if (campo == "Descripcion")
+                else if (campo == "Descripción")
                 {
                     switch (criterio)
                     {
@@ -111,6 +111,22 @@ namespace Negocio
                             consulta += "A.Descripcion LIKE '%" + filtro + "%'";
                             break;
 
+                    }
+                }
+
+                else if (campo == "Codigo")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con...":
+                            consulta += "A.Codigo LIKE '" + filtro + "%'";
+                            break;
+                        case "Termina con...":
+                            consulta += "A.Codigo LIKE '%" + filtro + "'";
+                            break;
+                        case "Contiene...":
+                            consulta += "A.Codigo LIKE '%" + filtro + "%'";
+                            break;
                     }
                 }
 
