@@ -49,7 +49,7 @@ namespace Negocio
 
             try
             {
-                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id AND ";
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl, A.Precio FROM ARTICULOS A INNER JOIN MARCAS M ON A.IdMarca = M.Id INNER JOIN CATEGORIAS C ON A.IdCategoria = C.Id WHERE ";
 
                 if (campo == "Precio")
                 {
@@ -94,6 +94,10 @@ namespace Negocio
                             break;
                         case "Contiene...":
                             consulta += "M.Descripcion LIKE '%" + filtro + "%'";
+                            break;
+
+                        case "Igual a...":
+                            consulta += "M.Descripcion = '" + filtro + "'";
                             break;
                     }
                 }

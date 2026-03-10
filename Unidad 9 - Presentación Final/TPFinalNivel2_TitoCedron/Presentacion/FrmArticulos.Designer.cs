@@ -48,6 +48,7 @@
             this.cboCampo = new System.Windows.Forms.ComboBox();
             this.cboCriterio = new System.Windows.Forms.ComboBox();
             this.txtFiltroAvanzado = new System.Windows.Forms.TextBox();
+            this.cboFiltroAvanzado = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
@@ -167,7 +168,7 @@
             // 
             this.btnReestablecer.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnReestablecer.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnReestablecer.Location = new System.Drawing.Point(1180, 763);
+            this.btnReestablecer.Location = new System.Drawing.Point(1179, 797);
             this.btnReestablecer.Name = "btnReestablecer";
             this.btnReestablecer.Size = new System.Drawing.Size(145, 55);
             this.btnReestablecer.TabIndex = 9;
@@ -180,7 +181,7 @@
             this.btnBuscar.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnBuscar.Location = new System.Drawing.Point(989, 763);
+            this.btnBuscar.Location = new System.Drawing.Point(988, 797);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(145, 55);
             this.btnBuscar.TabIndex = 8;
@@ -193,7 +194,7 @@
             this.lblCampo.AutoSize = true;
             this.lblCampo.Font = new System.Drawing.Font("Franklin Gothic Heavy", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCampo.ForeColor = System.Drawing.Color.White;
-            this.lblCampo.Location = new System.Drawing.Point(40, 786);
+            this.lblCampo.Location = new System.Drawing.Point(39, 820);
             this.lblCampo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCampo.Name = "lblCampo";
             this.lblCampo.Size = new System.Drawing.Size(99, 29);
@@ -205,7 +206,7 @@
             this.lblCriterio.AutoSize = true;
             this.lblCriterio.Font = new System.Drawing.Font("Franklin Gothic Heavy", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCriterio.ForeColor = System.Drawing.Color.White;
-            this.lblCriterio.Location = new System.Drawing.Point(327, 786);
+            this.lblCriterio.Location = new System.Drawing.Point(326, 820);
             this.lblCriterio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCriterio.Name = "lblCriterio";
             this.lblCriterio.Size = new System.Drawing.Size(101, 29);
@@ -217,7 +218,7 @@
             this.lblFiltro.AutoSize = true;
             this.lblFiltro.Font = new System.Drawing.Font("Franklin Gothic Heavy", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltro.ForeColor = System.Drawing.Color.White;
-            this.lblFiltro.Location = new System.Drawing.Point(616, 786);
+            this.lblFiltro.Location = new System.Drawing.Point(615, 820);
             this.lblFiltro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(78, 29);
@@ -229,7 +230,7 @@
             this.lblFiltroAvanzado.AutoSize = true;
             this.lblFiltroAvanzado.Font = new System.Drawing.Font("Franklin Gothic Heavy", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltroAvanzado.ForeColor = System.Drawing.Color.White;
-            this.lblFiltroAvanzado.Location = new System.Drawing.Point(39, 730);
+            this.lblFiltroAvanzado.Location = new System.Drawing.Point(38, 764);
             this.lblFiltroAvanzado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFiltroAvanzado.Name = "lblFiltroAvanzado";
             this.lblFiltroAvanzado.Size = new System.Drawing.Size(232, 36);
@@ -240,7 +241,7 @@
             // 
             this.cboCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCampo.FormattingEnabled = true;
-            this.cboCampo.Location = new System.Drawing.Point(139, 782);
+            this.cboCampo.Location = new System.Drawing.Point(138, 816);
             this.cboCampo.Name = "cboCampo";
             this.cboCampo.Size = new System.Drawing.Size(188, 33);
             this.cboCampo.TabIndex = 5;
@@ -250,19 +251,29 @@
             // 
             this.cboCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCriterio.FormattingEnabled = true;
-            this.cboCriterio.Location = new System.Drawing.Point(428, 782);
+            this.cboCriterio.Location = new System.Drawing.Point(427, 816);
             this.cboCriterio.Name = "cboCriterio";
             this.cboCriterio.Size = new System.Drawing.Size(188, 33);
             this.cboCriterio.TabIndex = 6;
             // 
             // txtFiltroAvanzado
             // 
-            this.txtFiltroAvanzado.Location = new System.Drawing.Point(694, 785);
+            this.txtFiltroAvanzado.Location = new System.Drawing.Point(693, 819);
             this.txtFiltroAvanzado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFiltroAvanzado.MaximumSize = new System.Drawing.Size(500, 100);
             this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
             this.txtFiltroAvanzado.Size = new System.Drawing.Size(228, 30);
             this.txtFiltroAvanzado.TabIndex = 7;
+            // 
+            // cboFiltroAvanzado
+            // 
+            this.cboFiltroAvanzado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFiltroAvanzado.FormattingEnabled = true;
+            this.cboFiltroAvanzado.Location = new System.Drawing.Point(693, 816);
+            this.cboFiltroAvanzado.Name = "cboFiltroAvanzado";
+            this.cboFiltroAvanzado.Size = new System.Drawing.Size(197, 33);
+            this.cboFiltroAvanzado.TabIndex = 15;
+            this.cboFiltroAvanzado.Visible = false;
             // 
             // FrmArticulos
             // 
@@ -271,6 +282,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.CornflowerBlue;
             this.ClientSize = new System.Drawing.Size(4104, 1173);
+            this.Controls.Add(this.cboFiltroAvanzado);
             this.Controls.Add(this.txtFiltroAvanzado);
             this.Controls.Add(this.cboCriterio);
             this.Controls.Add(this.cboCampo);
@@ -323,6 +335,7 @@
         private System.Windows.Forms.ComboBox cboCampo;
         private System.Windows.Forms.ComboBox cboCriterio;
         private System.Windows.Forms.TextBox txtFiltroAvanzado;
+        private System.Windows.Forms.ComboBox cboFiltroAvanzado;
     }
 }
 

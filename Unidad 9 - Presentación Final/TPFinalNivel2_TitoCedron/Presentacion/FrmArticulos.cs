@@ -38,6 +38,18 @@ namespace Presentacion
 
             dgvArticulos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
+            try
+            {
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                cboFiltroAvanzado.DataSource = marcaNegocio.listar();
+                cboFiltroAvanzado.DisplayMember = "Descripcion";
+                cboFiltroAvanzado.ValueMember = "Id";
+                cboFiltroAvanzado.SelectedIndex = -1; // Para que no haya nada seleccionado al cargar el formulario
+            }
+            catch (Exception ex) { 
+            MessageBox.Show ("Error al cargar las marcas: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void CargarArticulos()
@@ -237,12 +249,27 @@ namespace Presentacion
                 cboCriterio.Items.Add("Mayor a");
                 cboCriterio.Items.Add("Menor a");
                 cboCriterio.Items.Add("Igual a");
+
+                txtFiltroAvanzado.Visible = true;
+                txtFiltroAvanzado.Visible = false;
             }
-            else //Si eligió nombre o descripcion , ambas son textos
+            else if (opcion == "Marca") //Si eligió nombre o descripcion , ambas son textos
+            {
+                cboCriterio.Items.Add("Igual a...");
+
+                txtFiltroAvanzado.Visible = false;
+                cboFiltroAvanzado.Visible = true;
+            
+            }
+
+            else
             {
                 cboCriterio.Items.Add("Comienza con...");
                 cboCriterio.Items.Add("Termina con...");
                 cboCriterio.Items.Add("Contiene...");
+
+                txtFiltroAvanzado.Visible = true;
+                txtFiltroAvanzado.Visible = false;
 
             }
         }
@@ -261,28 +288,50 @@ namespace Presentacion
                 return true;
             }
 
-            //  Validar que la caja no esté vacía 
-            if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
-            {
-                MessageBox.Show("Ingrese un valor para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return true;
-            }
+            string campo = cboCampo.SelectedItem.ToString();
 
-            if (cboCampo.SelectedItem.ToString() == "Precio")
+            //Si NO es marca, entonces validamos la caja de texto. Si es marca, validamos el comboBox de marcas.
+
+            if (campo != "Marca")
             {
-                //Escudo antiletras
-                if (!decimal.TryParse(txtFiltroAvanzado.Text, out decimal resultado))
+                //  Validar que la caja no esté vacía 
+                if (string.IsNullOrEmpty(txtFiltroAvanzado.Text))
                 {
-                    MessageBox.Show("Ingrese un valor numérico válido para el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Ingrese un valor para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
 
-                if (resultado < 0)
+                if (cboCampo.SelectedItem.ToString() == "Precio")
                 {
-                    MessageBox.Show("El precio no puede ser negativo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //Escudo antiletras
+                    if (!decimal.TryParse(txtFiltroAvanzado.Text, out decimal resultado))
+                    {
+                        MessageBox.Show("Ingrese un valor numérico válido para el precio.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return true;
+                    }
+
+                    if (resultado < 0)
+                    {
+                        MessageBox.Show("El precio no puede ser negativo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return true;
+                    }
+                }
+
+
+            }
+
+            else //Si el campo es marca, valido el comboBox de marcas
+            {
+                if (cboFiltroAvanzado.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Seleccione una marca para filtrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
             }
+
+
+
+
 
             // Si llegó hasta aquí, no hay ningún error
             return false;
@@ -294,16 +343,27 @@ namespace Presentacion
 
             try
             {
-                // Si devuelve true (hay error).
                 if (ValidarFiltro())
                 {
                     return;
                 }
 
-                // Si pasamos el if anterior, capturamos datos y filtramos
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
-                string filtro = txtFiltroAvanzado.Text;
+
+                // Aquí capturamos el filtro de la caja de texto O del combo, dependiendo del campo
+                string filtro;
+                if (campo == "Marca")
+                {
+                    // Extraemos el texto de la marca seleccionada
+                    filtro = cboFiltroAvanzado.Text;
+                }
+                else
+                {
+                    filtro = txtFiltroAvanzado.Text;
+                }
+
+               
 
                 dgvArticulos.DataSource = negocio.Filtrar(campo, criterio, filtro);
                 FormatearGrilla();
@@ -328,6 +388,8 @@ namespace Presentacion
 
             //Cargamos todos los articulos
             CargarArticulos();
+
+            cboFiltroAvanzado.SelectedIndex = -1;
         }
     }
 }
